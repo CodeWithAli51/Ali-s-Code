@@ -1,0 +1,49 @@
+/* General styling */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+/* Menu item cards */
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Order status badges */
+.badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+}
+
+/* Admin dashboard stats */
+.card-text {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Form styling */
+.form-label {
+    font-weight: 500;
+}
+
+/* Nav pills for menu categories */
+.nav-pills .nav-link.active {
+    background-color: #0d6efd;
+}
+
+/* Cart quantity controls */
+.qty-input {
+    max-width: 40px;
+    text-align: center;
+}
+
+/* Toast notification */
+.toast {
+    background-color: white;
+}

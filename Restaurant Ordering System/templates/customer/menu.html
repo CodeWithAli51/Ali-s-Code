@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Menu</h2>
+
+<div class="row mb-4">
+    <div class="col">
+        <ul class="nav nav-pills" id="menuTabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#all" data-bs-toggle="tab">All</a>
+            </li>
+            {% for category in categories %}
+            <li class="nav-item">
+                <a class="nav-link" href="#{{ category|lower }}" data-bs-toggle="tab">{{ category }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="all">
+        <div class="row">
+            {% for item in menu_items %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if item.image_url %}
+                    <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}">
+                    {% else %}
+                    <div class="card-img-top bg-light text-center py-5">No Image</div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text"><strong>${{ "%.2f"|format(item.price) }}</strong></p>
+                        <div class="d-flex">
+                            <input type="number" min="1" value="1" class="form-control me-2 quantity-input" style="width: 70px;">
+                            <button class="btn btn-primary add-to-cart" data-id="{{ item.id }}">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    {% for category in categories %}
+    <div class="tab-pane fade" id="{{ category|lower }}">
+        <div class="row">
+            {% for item in menu_items if item.category == category %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if item.image_url %}
+                    <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}">
+                    {% else %}
+                    <div class="card-img-top bg-light text-center py-5">No Image</div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text"><strong>${{ "%.2f"|format(item.price) }}</strong></p>
+                        <div class="d-flex">
+                            <input type="number" min="1" value="1" class="form-control me-2 quantity-input" style="width: 70px;">
+                            <button class="btn btn-primary add-to-cart" data-id="{{ item.id }}">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Cart notification -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+    <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Cart Updated</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Item added to your cart!
+            <div class="mt-2">
+                <a href="{{ url_for('customer.view_cart') }}" class="btn btn-sm btn-primary">View Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const toast = new bootstrap.Toast(document.getElementById('cartToast'));
+    
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const quantityInput = this.parentElement.querySelector('.quantity-input');
+            const quantity = parseInt(quantityInput.value);
+            
+            if (quantity > 0) {
+                fetch(`/customer/add_to_cart/${itemId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ quantity: quantity }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        toast.show();
+                        quantityInput.value = 1;
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to add item to cart');
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
