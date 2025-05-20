@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">Python Tutorial</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>Python Tutorial</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#variables">Variables & Data Types</a>
+        <a href="#operators">Operators</a>
+        <a href="#control">Control Flow</a>
+        <a href="#functions">Functions</a>
+        <a href="#lists">Lists</a>
+        <a href="#dictionaries">Dictionaries</a>
+        <a href="#tuples">Tuples</a>
+        <a href="#sets">Sets</a>
+        <a href="#files">File Handling</a>
+        <a href="#exceptions">Exception Handling</a>
+        <a href="#classes">Classes & Objects</a>
+        <a href="#modules">Modules</a>
+        <a href="#libraries">Libraries</a>
+        <a href="#oop">OOP Concepts</a>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- Block 1: Introduction -->
+        <div id="intro" class="section">
+            <h2>Introduction to Python</h2>
+            <p>Python is a high-level, interpreted programming language known for its simplicity and readability. It is widely used for web development, data analysis, artificial intelligence, scientific computing, and more.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Easy to Learn:</strong> Python has a simple and intuitive syntax.</li>
+                <li><strong>Versatile:</strong> Python can be used for a wide range of applications.</li>
+                <li><strong>Large Standard Library:</strong> Python comes with a rich set of modules and libraries.</li>
+                <li><strong>Cross-Platform:</strong> Python runs on Windows, macOS, Linux, and more.</li>
+            </ul>
+            <pre><code>print("Hello, World!")</code></pre>
+        </div>
+
+        <!-- Block 2: Variables & Data Types -->
+        <div id="variables" class="section">
+            <h2>Variables & Data Types</h2>
+            <p>Variables are used to store data in Python. Python is dynamically typed, meaning you don't need to declare the type of a variable.</p>
+            <p><strong>Data Types:</strong></p>
+            <ul>
+                <li><strong>Primitive Types:</strong> <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>.</li>
+                <li><strong>Non-Primitive Types:</strong> <code>list</code>, <code>tuple</code>, <code>set</code>, <code>dict</code>.</li>
+            </ul>
+            <pre><code>name = "John"  # String
+age = 25      # Integer
+height = 5.9  # Float
+is_student = True  # Boolean</code></pre>
+        </div>
+
+        <!-- Block 3: Operators -->
+        <div id="operators" class="section">
+            <h2>Operators</h2>
+            <p>Python provides various types of operators for performing operations on variables and values.</p>
+            <p><strong>Types of Operators:</strong></p>
+            <ul>
+                <li><strong>Arithmetic Operators:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code>.</li>
+                <li><strong>Comparison Operators:</strong> <code>==</code>, <code>!=</code>, <code>></code>, <code><</code>, <code>>=</code>, <code><=</code>.</li>
+                <li><strong>Logical Operators:</strong> <code>and</code>, <code>or</code>, <code>not</code>.</li>
+                <li><strong>Assignment Operators:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>.</li>
+            </ul>
+            <pre><code>a = 10
+b = 5
+sum = a + b  # Arithmetic
+is_equal = a == b  # Comparison
+result = a > 5 and b < 10  # Logical
+a += 5  # Assignment</code></pre>
+        </div>
+
+        <!-- Block 4: Control Flow -->
+        <div id="control" class="section">
+            <h2>Control Flow</h2>
+            <p>Control flow statements allow you to control the execution of your program based on conditions or loops.</p>
+            <p><strong>Types of Control Flow Statements:</strong></p>
+            <ul>
+                <li><strong>If-Else:</strong> Executes a block of code if a condition is true.</li>
+                <li><strong>Loops:</strong> Repeats a block of code while a condition is true (e.g., <code>for</code>, <code>while</code>).</li>
+            </ul>
+            <pre><code>age = 18
+if age >= 18:
+    print("You are an adult.")
+else:
+    print("You are a minor.")</code></pre>
+        </div>
+
+        <!-- Block 5: Functions -->
+        <div id="functions" class="section">
+            <h2>Functions</h2>
+            <p>Functions are reusable blocks of code that perform a specific task.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Function Definition:</strong> Use the <code>def</code> keyword.</li>
+                <li><strong>Arguments:</strong> Pass data to functions.</li>
+                <li><strong>Return Values:</strong> Functions can return data using the <code>return</code> keyword.</li>
+            </ul>
+            <pre><code>def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("John"))  # Output: Hello, John!</code></pre>
+        </div>
+
+        <!-- Block 6: Lists -->
+        <div id="lists" class="section">
+            <h2>Lists</h2>
+            <p>Lists are used to store multiple items in a single variable.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Mutable:</strong> Lists can be modified after creation.</li>
+                <li><strong>Indexing:</strong> Access elements using indices.</li>
+                <li><strong>Methods:</strong> <code>append()</code>, <code>remove()</code>, <code>sort()</code>, etc.</li>
+            </ul>
+            <pre><code>fruits = ["Apple", "Banana", "Orange"]
+fruits.append("Mango")  # Add to list
+print(fruits)  # Output: ['Apple', 'Banana', 'Orange', 'Mango']</code></pre>
+        </div>
+
+        <!-- Block 7: Dictionaries -->
+        <div id="dictionaries" class="section">
+            <h2>Dictionaries</h2>
+            <p>Dictionaries are used to store key-value pairs.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Mutable:</strong> Dictionaries can be modified after creation.</li>
+                <li><strong>Keys:</strong> Must be unique and immutable.</li>
+                <li><strong>Methods:</strong> <code>keys()</code>, <code>values()</code>, <code>items()</code>.</li>
+            </ul>
+            <pre><code>person = {"name": "John", "age": 25}
+print(person["name"])  # Output: John</code></pre>
+        </div>
+
+        <!-- Block 8: Tuples -->
+        <div id="tuples" class="section">
+            <h2>Tuples</h2>
+            <p>Tuples are used to store multiple items in a single variable. Unlike lists, tuples are immutable.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Immutable:</strong> Tuples cannot be modified after creation.</li>
+                <li><strong>Indexing:</strong> Access elements using indices.</li>
+            </ul>
+            <pre><code>coordinates = (10, 20)
+print(coordinates[0])  # Output: 10</code></pre>
+        </div>
+
+        <!-- Block 9: Sets -->
+        <div id="sets" class="section">
+            <h2>Sets</h2>
+            <p>Sets are used to store unique items in a single variable.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Unique Elements:</strong> Sets automatically remove duplicates.</li>
+                <li><strong>Methods:</strong> <code>add()</code>, <code>remove()</code>, <code>union()</code>, etc.</li>
+            </ul>
+            <pre><code>fruits = {"Apple", "Banana", "Orange"}
+fruits.add("Mango")
+print(fruits)  # Output: {'Apple', 'Banana', 'Orange', 'Mango'}</code></pre>
+        </div>
+
+        <!-- Block 10: File Handling -->
+        <div id="files" class="section">
+            <h2>File Handling</h2>
+            <p>Python provides built-in functions for working with files.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Open Files:</strong> Use the <code>open()</code> function.</li>
+                <li><strong>Read Files:</strong> Use <code>read()</code>, <code>readline()</code>, or <code>readlines()</code>.</li>
+                <li><strong>Write Files:</strong> Use <code>write()</code> or <code>writelines()</code>.</li>
+            </ul>
+            <pre><code># Writing to a file
+with open("example.txt", "w") as file:
+    file.write("Hello, World!")
+
+# Reading from a file
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)  # Output: Hello, World!</code></pre>
+        </div>
+
+        <!-- Block 11: Exception Handling -->
+        <div id="exceptions" class="section">
+            <h2>Exception Handling</h2>
+            <p>Exception handling in Python is used to handle runtime errors and maintain the normal flow of the program.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Try-Except Block:</strong> Catches and handles exceptions.</li>
+                <li><strong>Finally Block:</strong> Executes code regardless of whether an exception occurs.</li>
+            </ul>
+            <pre><code>try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+finally:
+    print("Execution complete.")</code></pre>
+        </div>
+
+        <!-- Block 12: Classes & Objects -->
+        <div id="classes" class="section">
+            <h2>Classes & Objects</h2>
+            <p>Python is an object-oriented programming language. Classes are blueprints for creating objects.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Class Definition:</strong> Use the <code>class</code> keyword.</li>
+                <li><strong>Objects:</strong> Instances of a class.</li>
+                <li><strong>Methods:</strong> Functions defined inside a class.</li>
+            </ul>
+            <pre><code>class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        return f"Hello, my name is {self.name}"
+
+person = Person("John", 25)
+print(person.greet())  # Output: Hello, my name is John</code></pre>
+        </div>
+
+        <!-- Block 13: Modules -->
+        <div id="modules" class="section">
+            <h2>Modules</h2>
+            <p>Modules are Python files that contain reusable code.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Importing Modules:</strong> Use the <code>import</code> keyword.</li>
+                <li><strong>Standard Library:</strong> Python comes with many built-in modules.</li>
+            </ul>
+            <pre><code>import math
+print(math.sqrt(16))  # Output: 4.0</code></pre>
+        </div>
+
+        <!-- Block 14: Libraries -->
+        <div id="libraries" class="section">
+            <h2>Libraries</h2>
+            <p>Python has a rich ecosystem of third-party libraries for various tasks.</p>
+            <p><strong>Popular Libraries:</strong></p>
+            <ul>
+                <li><strong>NumPy:</strong> For numerical computing.</li>
+                <li><strong>Pandas:</strong> For data manipulation and analysis.</li>
+                <li><strong>Matplotlib:</strong> For data visualization.</li>
+            </ul>
+            <pre><code>import numpy as np
+array = np.array([1, 2, 3])
+print(array)  # Output: [1 2 3]</code></pre>
+        </div>
+
+        <!-- Block 15: OOP Concepts -->
+        <div id="oop" class="section">
+            <h2>OOP Concepts</h2>
+            <p>Python supports object-oriented programming (OOP) principles.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Encapsulation:</strong> Bundling data and methods within a class.</li>
+                <li><strong>Inheritance:</strong> Creating new classes from existing ones.</li>
+                <li><strong>Polymorphism:</strong> Using a single interface for different data types.</li>
+            </ul>
+            <pre><code>class Animal:
+    def sound(self):
+        return "Animal makes a sound"
+
+class Dog(Animal):
+    def sound(self):
+        return "Dog barks"
+
+dog = Dog()
+print(dog.sound())  # Output: Dog barks</code></pre>
+        </div>
+    </div>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

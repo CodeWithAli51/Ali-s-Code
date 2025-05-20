@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">CSS (Cascading Style Sheets)</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>CSS Tutorial</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#ways-to-apply-css">Ways to Apply CSS</a>
+        <a href="#selectors-in-css">Selectors in CSS</a>
+        <a href="#colors-and-backgrounds">Colors and Backgrounds</a>
+        <a href="#fonts-and-text-styling">Fonts and Text Styling</a>
+        <a href="#box-model">Box Model</a>
+        <a href="#display-and-visibility">Display and Visibility</a>
+        <a href="#positioning-and-layouts">Positioning and Layouts</a>
+        <a href="#css-transitions-and-animations">CSS Transitions and Animations</a>
+        <a href="#responsive-web-design">Responsive Web Design</a>
+        <a href="#css-variables">CSS Variables</a>
+        <a href="#pseudo-classes-and-pseudo-elements">Pseudo-Classes and Pseudo-Elements</a>
+        <a href="#shadows-and-effects">Shadows and Effects</a>
+        <a href="#advanced-css-features">Advanced CSS Features</a>
+        <a href="#css-best-practices">CSS Best Practices</a>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- Block 1: Introduction -->
+        <div id="intro" class="section">
+            <h2>Introduction to CSS</h2>
+            <p>CSS (Cascading Style Sheets) is the language used to style and format web pages. It defines how HTML elements appear on the screen, including layout, colors, fonts, and animations. Mastering CSS enables developers to create visually appealing and responsive designs.</p>
+            <p><strong></strong></p>
+            <pre><code>Example: &lt;!DOCTYPE html&gt;
+                &lt;html&gt;
+                &lt;head&gt;
+                    &lt;style&gt;
+                        p {
+                            color: blue;
+                            font-size: 20px;
+                        }
+                    &lt;/style&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;p&gt;Hello, CSS!&lt;/p&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;</code></pre>
+        </div>
+
+        <!-- Block 2: Ways to Apply CSS -->
+        <div id="ways-to-apply-css" class="section">
+            <h2>Ways to Apply CSS</h2>
+            <p>CSS can be implemented using three methods:</p>
+            <p><strong>1 Inline CSS</strong></p>
+            <ul>
+                <li><strong></strong> Written inside an HTML element using the style attribute.</li>
+                <li>Example:<strong></strong> (style="color: blue;">Hello)</li>
+                <li><strong></strong> Used for quick fixes but not recommended for large projects.</li>
+            </ul>
+            <p><strong>2. Internal CSS</strong></p>
+            <ul>
+                <li><strong></strong> Written inside the (style) tag in the (head) section of an HTML file.</li>
+                <li><strong></strong> Useful for single-page styling but difficult to manage across multiple pages.</li>
+            </ul>
+            <p><strong>3. External CSS</strong></p>
+            <ul>
+                <li><strong></strong> Stored in a separate .css file and linked using (link rel="stylesheet" href="style.css").</li>
+                <li><strong></strong> Best practice for maintaining consistency and reusability across multiple web pages.</li>
+            </ul>
+            <pre><code>Example 1: &lt;p style="color: blue;"&gt;Hello&lt;/p&gt;
+                
+Example 2: &lt;head&gt;
+                &lt;style&gt;
+                    p {
+                        color: blue;
+                    }
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;p&gt;Hello&lt;/p&gt;
+            &lt;/body&gt;
+            
+Example 3: &lt;head&gt;
+            &lt;link rel="stylesheet" href="style.css"&gt;
+        &lt;/head&gt;
+            </code></pre>
+        </div>
+
+        <!-- Block 3: Selectors in CSS -->
+        <div id="selectors-in-css" class="section">
+            <h2>Selectors in CSS</h2>
+            <p>Selectors are used to target and style specific HTML elements.</p>
+            <p><strong>1. Basic Selectors</strong></p>
+            <ul>
+                <li><strong>Universal Selector (*):</strong> Styles all elements.</li>
+                <li><strong>Element Selector (h1, p):</strong> Targets specific HTML tags.</li>
+                <li><strong>Class Selector (.classname):</strong> Applies styles to elements with a given class.</li>
+                <li><strong>ID Selector (#idname):</strong> Targets a unique element using an ID.</li>
+                </li>
+            </ul>
+            <p><strong>2. Advanced Selectors</strong></p>
+            <ul>
+                <li><strong>Attribute Selector ([type="text"]):</strong> Selects elements based on attributes.</li>
+                <li><strong>Group Selector (h1, p, div):</strong> Styles multiple elements at once.</li>
+                <li><strong>Descendant (div p):</strong> Targets elements inside a parent element.</li>
+                <li><strong>Child (div > p):</strong> Styles only direct children of a parent element.</li>
+                <li><strong>Sibling (h1 + p):</strong> Targets elements next to a specific element.</li>
+                </li>
+            </ul>
+            <pre><code>Example 1: * { color: red; } /* Universal Selector */
+                h1 { color: blue; } /* Element Selector */
+                .classname { color: green; } /* Class Selector */
+                #idname { color: purple; } /* ID Selector */
+            
+Example 2: [type="text"] { background-color: yellow; } /* Attribute Selector */
+h1, p, div { margin: 10px; } /* Group Selector */
+div p { color: orange; } /* Descendant Selector */
+div > p { font-weight: bold; } /* Child Selector */
+h1 + p { text-decoration: underline; } /* Sibling Selector */</code></pre>
+        </div>
+
+        <!-- Block 4: Colors and Backgrounds -->
+        <div id="colors-and-backgrounds" class="section">
+            <h2>Colors and Backgrounds</h2>
+            <p>CSS allows customization of colors and backgrounds using different properties.</p>
+            <p><strong>1. Color Formats</strong></p>
+            <ul>
+                <li><strong>Named Colors:</strong> red, blue, green.</li>
+                <li><strong>HEX Codes:</strong> #ff5733.</li>
+                <li><strong>RGB Values:</strong> rgb(255, 87, 51).</li>
+                <li><strong>HSL:</strong> hsl(12, 100%, 50%).</li>
+            </ul>
+            <p><strong>2. Background Properties</strong></p>
+            <ul>
+                <li><strong>background-color:</strong> Sets background color.</li>
+                <li><strong>background-image:</strong> Adds background images.</li>
+                <li><strong>background-size:</strong> Defines image dimensions.</li>
+                <li><strong>background-position:</strong> Controls image placement.</li>
+                <li><strong>background-repeat:</strong> Determines if an image repeats.</li>
+            </ul>
+            <pre><code>Example: body {
+                background-color: #ff5733; /* HEX */
+                background-image: url('image.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }</code></pre>
+        </div>
+
+        <!-- Block 5: Fonts and Text Styling -->
+        <div id="fonts-and-text-styling" class="section">
+            <h2>Fonts and Text Styling</h2>
+            <p>Typography enhances readability and aesthetics.</p>
+            <p><strong>1. Font Styling</strong></p>
+            <ul>
+                <li><strong>font-family:</strong> Defines fonts (Arial, serif).</li>
+                <li><strong>font-size:</strong> Sets text size (16px, 1.2em).</li>
+                <li><strong>font-weight:</strong> Adjusts boldness (bold, 400).</li>
+                <li><strong>font-style:</strong> Controls italicization (italic, normal).</li>
+            </ul>
+            <p><strong>2. Text Formatting</strong></p>
+            <ul>
+                <li><strong>text-align:</strong> Aligns text (left, right, center).</li>
+                <li><strong>line-height:</strong> Defines spacing between lines.</li>
+                <li><strong>letter-spacing:</strong> Adjusts spacing between characters.</li>
+                <li><strong>text-transform:</strong> Converts text to uppercase, lowercase, or capitalized.</li>
+            </ul>
+            <pre><code>Example: p {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+                line-height: 1.5;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }</code></pre>
+        </div>
+
+        <!-- Block 6: Box Model -->
+        <div id="box-model" class="section">
+            <h2>Box Model</h2>
+            <p></p>
+            <p><strong>The box model consists of four parts:</strong></p>
+            <ul>
+                <li><strong>Content:</strong> The actual text or image inside an element.</li>
+                <li><strong>Padding:</strong> Space between content and border.</li>
+                <li><strong>Border:</strong> The outline surrounding an element.</li>
+                <li><strong>Margin:</strong> Space outside the border that separates elements.</li>
+            </ul>
+            <pre><code>Example: div {
+                width: 200px;
+                height: 100px;
+                padding: 10px;
+                border: 5px solid black;
+                margin: 20px;
+            }</code></pre>
+        </div>
+
+        <!-- Block 7: Display and Visibility -->
+        <div id="display-and-visibility" class="section">
+            <h2>Display and Visibility</h2>
+            <p>CSS controls how elements appear and behave on a page.</p>
+            <p><strong>1. Display Types</strong></p>
+            <ul>
+                <li><strong>block:</strong> Takes full width, appearing on a new line.</li>
+                <li><strong>inline:</strong> Stays within the same line.</li>
+                <li><strong>inline-block:</strong> Allows inline elements with width and height.</li>
+                <li><strong>none:</strong> Hides an element completely.</li>
+            </ul>
+            <p><strong>2. Visibility</strong></p>
+            <ul>
+                <li><strong>visibility: hidden;</strong> Thides an element but retains space.</li>
+            </ul>
+            <pre><code>Example: .block { display: block; }
+                .inline { display: inline; }
+                .inline-block { display: inline-block; }
+                .hidden { display: none; }
+                .invisible { visibility: hidden; }</code></pre>
+        </div>
+
+        <!-- Block 8: Positioning and Layouts -->
+        <div id="positioning-and-layouts" class="section">
+            <h2>Positioning and Layouts</h2>
+            <p>CSS provides different positioning methods for layout control.</p>
+            <p><strong>1. Positioning</strong></p>
+            <ul>
+                <li><strong>static:</strong> Default flow positioning.</li>
+                <li><strong>relative:</strong> Moves element relative to its normal position.</li>
+                <li><strong>absolute:</strong> Positions relative to the nearest positioned ancestor.</li>
+                <li><strong>fixed:</strong> Stays in place even while scrolling.</li>
+                <li><strong>sticky:</strong> Acts as relative until it reaches a scroll threshold.</li>
+            </ul>
+            <p><strong>2. Flexbox</strong></p>
+            <ul>
+                <li><strong></strong> A one-dimensional layout model for aligning elements horizontally or vertically.</li>
+            </ul>
+            <p><strong>3. CSS Grid</strong></p>
+            <ul>
+                <li><strong></strong> A two-dimensional system for arranging elements in rows and columns.</li>
+            </ul>
+            <pre><code>Example 1: div {
+                position: absolute;
+                top: 50px;
+                left: 100px;
+            }
+
+Example 2: .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+Example 3: .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}</code></pre>
+        </div>
+
+        <!-- Block 9: CSS Transitions and Animations -->
+        <div id="css-transitions-and-animations" class="section">
+            <h2>CSS Transitions and Animations</h2>
+            <p>CSS enables dynamic visual effects</p>
+            <p><strong>1. Transitions</strong></p>
+            <ul>
+                <li><strong></strong> Adds smooth effects when a property changes.</li>
+                <li><strong></strong> Uses transition-property, transition-duration, and transition-timing-function.</li>
+            </ul>
+            <p><strong>2. Animations</strong></p>
+            <ul>
+                <li><strong></strong> Uses @keyframes to define motion effects.</li>
+                <li><strong></strong> Properties like animation-name, animation-duration, and animation-delay control animation behavior.</li>
+            </ul>
+            <pre><code>Example 1:div {
+                transition: background-color 0.5s ease;
+            }
+            
+            div:hover {
+                background-color: red;
+            }
+
+Example 2: @keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
+div {
+    animation-name: example;
+    animation-duration: 4s;
+}</code></pre>
+        </div>
+
+        <!-- Block 10: Responsive Web Design -->
+        <div id="responsive-web-design" class="section">
+            <h2>Responsive Web Design</h2>
+            <p>Ensures web pages adapt to different screen sizes.</p>
+            <p><strong>1. Media Queries</strong></p>
+            <ul>
+                <li><strong></strong> Uses @media to apply styles based on device width.</li>
+            </ul>
+            <p><strong>Viewport Meta Tag</strong></p>
+            <ul>
+                <li><strong></strong> (meta name="viewport" content="width=device-width, initial-scale=1.0") ensures mobile responsiveness.</li>
+            </ul>
+            <pre><code>Example: @media (max-width: 600px) {
+                body {
+                    background-color: lightblue;
+                }
+            }</code></pre>
+        </div>
+
+        <!-- Block 11: CSS Variables -->
+        <div id="css-variables" class="section">
+            <h2>CSS Variables</h2>
+            <p>CSS variables store reusable values to improve consistency.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong></strong> Declared using --var-name: value; inside :root.</li>
+                <li><strong></strong> Used with var(--var-name).</li>
+            </ul>
+            <pre><code>Example: :root {
+                --main-color: blue;
+            }
+            
+            div {
+                color: var(--main-color);
+            }</code></pre>
+        </div>
+
+        <!-- Block 12: Pseudo-Classes and Pseudo-Elements -->
+        <div id="pseudo-classes-and-pseudo-elements" class="section">
+            <h2>Pseudo-Classes and Pseudo-Elements</h2>
+            <p></p>
+            <p><strong>1. Pseudo-Classes</strong></p>
+            <ul>
+                <li><strong></strong> Apply styles based on the element’s state (:hover, :focus, :nth-child(n)).</li>
+            </ul>
+            <p><strong>2. Pseudo-Elements</strong></p>
+            <ul>
+                <li><strong></strong> Style specific parts of elements (::before, ::after, ::first-letter).</li>
+            </ul>
+            <pre><code>Example: a:hover { color: red; } /* Pseudo-Class */
+
+                p::first-letter { font-size: 2em; } /* Pseudo-Element */</code></pre>
+        </div>
+
+        <!-- Block 13: Shadows and Effects -->
+        <div id="shadows-and-effects" class="section">
+            <h2>Shadows and Effects</h2>
+            <p>Greedy algorithms make locally optimal choices at each step to find a global optimum.</p>
+            <p><strong>1. Box Shadow</strong></p>
+            <ul>
+                <li><strong></strong> Adds shadow effects to elements using box-shadow.</li>
+            </ul>
+            <p><strong>2. Text Shadow</strong></p>
+            <ul>
+                <li><strong></strong> Creates shadow effects on text with text-shadow.</li>
+            </ul>
+            <p><strong>3. Opacity and Filters</strong></p>
+            <ul>
+                <li><strong>opacity:</strong> Controls element transparency.</li>
+                <li><strong>filter:</strong> Applies effects like blur and brightness.</li>
+            </ul>
+            <pre><code>Example: div {
+                box-shadow: 5px 5px 10px gray;
+                text-shadow: 2px 2px 5px black;
+                opacity: 0.8;
+            }</code></pre>
+        </div>
+
+        <!-- Block 14: Advanced CSS Features -->
+        <div id="advanced-css-features" class="section">
+            <h2>Advanced CSS Features</h2>
+            <p></p>
+            <p><strong>1. CSS Grid Layout</strong></p>
+            <ul>
+                <li><strong></strong> Defines rows and columns for advanced layouts.</li>
+            </ul>
+            <p><strong>2. Flexbox</strong></p>
+            <ul>
+                <li><strong></strong> Aligns elements efficiently in a flexible container.</li>
+            </ul>
+            <p><strong>3. CSS Clipping & Masking</strong></p>
+            <ul>
+                <li><strong>clip-path:</strong> Clips elements into custom shapes.</li>
+                <li><strong>mask:</strong> Hides or reveals portions of an element.</li>
+            </ul>
+            <p><strong>4. CSS Blend Modes</strong></p>
+            <ul>
+                <li><strong>mix-blend-mode:</strong> Blends elements with the background.</li>
+            </ul>
+            <pre><code>Example: .clip-example {
+                clip-path: circle(50%);
+            }
+            
+            .blend-mode {
+                mix-blend-mode: multiply;
+            }</code></pre>
+       </div>
+
+       <!-- Block 15: CSS Best Practices -->
+       <div id="css-best-practices" class="section">
+        <h2>CSS Best Practices</h2>
+        <p></p>
+        <p><strong></strong></p>
+        <ul>
+            <li><strong></strong> Use external stylesheets for scalability</li>
+            <li><strong></strong> Follow a mobile-first approach.</li>
+            <li><strong></strong> Use CSS variables for maintainability</li>
+            <li><strong></strong> Minimize CSS for faster load times.</li>
+        </ul>
+   </div>
+       </div>
+       <script>
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

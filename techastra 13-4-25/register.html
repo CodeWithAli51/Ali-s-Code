@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registration page</title>
+    <link rel="stylesheet" href="styleregister.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+  <div class="wrapper">
+    <form action="login_register.php" method="POST">
+        <h1 id="heading">Registration</h1>
+        <div class="input-box">
+            <div class="input-feild">
+                <input type="text" placeholder="First name" name="firstname" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-feild">
+                <input type="text" placeholder="Last name" name="lastname" required>
+                <i class='bx bxs-user'></i>
+            </div>
+        </div>
+        <div class="input-box">
+            <div class="input-feild">
+                <input type="email" placeholder="Email" name="email" required>
+                <i class='bx bxs-envelope'></i>
+            </div>
+            <div class="input-feild">
+                <input type="number" placeholder="Phone number" name="phone" required>
+                <i class='bx bxs-phone'></i>
+            </div>
+        </div>
+        <div class="input-box">
+            <div class="input-feild">
+                <input type="password" placeholder="Password" name="password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-feild">
+                <input type="password" placeholder="Confirm Password" name="confirm_password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+        </div>
+        <button type="submit" class="btn" name="register">Register</button>
+    </form>
+  </div>
+</body>
+</html> 

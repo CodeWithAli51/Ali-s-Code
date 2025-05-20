@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">C++ Tutorial</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>C++ Tutorial</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#variables">Variables & Data Types</a>
+        <a href="#operators">Operators</a>
+        <a href="#control">Control Flow</a>
+        <a href="#oop">OOP Concepts</a>
+        <a href="#exceptions">Exception Handling</a>
+        <a href="#stl">STL</a>
+        <a href="#pointers">Pointers</a>
+        <a href="#templates">Templates</a>
+        <a href="#files">File Handling</a>
+        <a href="#multithreading">Multithreading</a>
+        <a href="#move-semantics">Move Semantics</a>
+        <a href="#smart-pointers">Smart Pointers</a>
+        <a href="#lambda">Lambda Expressions</a>
+        <a href="#concurrency">Concurrency</a>
+        <a href="#metaprogramming">Metaprogramming</a>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- Block 1: Introduction -->
+        <div id="intro" class="section">
+            <h2>Introduction to C++</h2>
+            <p>C++ is a high-level, general-purpose programming language that supports both procedural and object-oriented programming. It is widely used for system programming, game development, and performance-critical applications.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Performance:</strong> C++ is known for its high performance and efficiency.</li>
+                <li><strong>Object-Oriented:</strong> Supports encapsulation, inheritance, polymorphism, and abstraction.</li>
+                <li><strong>Standard Template Library (STL):</strong> Provides a rich set of template classes and functions for data structures and algorithms.</li>
+                <li><strong>Low-Level Memory Manipulation:</strong> Allows direct memory management using pointers.</li>
+            </ul>
+            <pre><code>#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!" << endl;
+    return 0;
+}</code></pre>
+        </div>
+
+        <!-- Block 2: Variables & Data Types -->
+        <div id="variables" class="section">
+            <h2>Variables & Data Types</h2>
+            <p>Variables are used to store data in C++. Each variable has a specific data type that defines the kind of data it can hold.</p>
+            <p><strong>Primitive Data Types:</strong></p>
+            <ul>
+                <li><code>int</code>: Integer (e.g., 10, -5).</li>
+                <li><code>float</code>: Single-precision floating-point number (e.g., 3.14f).</li>
+                <li><code>double</code>: Double-precision floating-point number (e.g., 3.14159).</li>
+                <li><code>char</code>: Single character (e.g., 'A').</li>
+                <li><code>bool</code>: Boolean value (<code>true</code> or <code>false</code>).</li>
+            </ul>
+            <p><strong>Non-Primitive Data Types:</strong></p>
+            <ul>
+                <li><code>string</code>: A sequence of characters (from the STL).</li>
+                <li>Arrays: A collection of elements of the same type.</li>
+                <li>Classes and Objects: User-defined data types.</li>
+            </ul>
+            <pre><code>int age = 25;
+double price = 99.99;
+string name = "John";</code></pre>
+        </div>
+
+        <!-- Block 3: Operators -->
+        <div id="operators" class="section">
+            <h2>Operators</h2>
+            <p>C++ provides various types of operators for performing operations on variables and values.</p>
+            <p><strong>Types of Operators:</strong></p>
+            <ul>
+                <li><strong>Arithmetic Operators:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>.</li>
+                <li><strong>Comparison Operators:</strong> <code>==</code>, <code>!=</code>, <code>></code>, <code><</code>, <code>>=</code>, <code><=</code>.</li>
+                <li><strong>Logical Operators:</strong> <code>&&</code>, <code>||</code>, <code>!</code>.</li>
+                <li><strong>Assignment Operators:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>.</li>
+            </ul>
+            <pre><code>int a = 10, b = 5;
+int sum = a + b; // Arithmetic
+bool isEqual = (a == b); // Comparison
+bool result = (a > 5 && b < 10); // Logical
+a += 5; // Assignment</code></pre>
+        </div>
+
+        <!-- Block 4: Control Flow -->
+        <div id="control" class="section">
+            <h2>Control Flow</h2>
+            <p>Control flow statements allow you to control the execution of your program based on conditions or loops.</p>
+            <p><strong>Types of Control Flow Statements:</strong></p>
+            <ul>
+                <li><strong>If-Else:</strong> Executes a block of code if a condition is true.</li>
+                <li><strong>Switch:</strong> Executes one of many code blocks based on the value of a variable.</li>
+                <li><strong>Loops:</strong> Repeats a block of code while a condition is true (e.g., <code>for</code>, <code>while</code>, <code>do-while</code>).</li>
+            </ul>
+            <pre><code>int age = 18;
+if (age >= 18) {
+    cout << "You are an adult." << endl;
+} else {
+    cout << "You are a minor." << endl;
+}</code></pre>
+        </div>
+
+        <!-- Block 5: OOP Concepts -->
+        <div id="oop" class="section">
+            <h2>OOP Concepts</h2>
+            <p>C++ supports object-oriented programming. The four main principles of OOP are:</p>
+            <ul>
+                <li><strong>Encapsulation:</strong> Bundling data and methods within a class.</li>
+                <li><strong>Inheritance:</strong> Creating new classes from existing ones.</li>
+                <li><strong>Polymorphism:</strong> Allowing objects to take on multiple forms (e.g., function overriding).</li>
+                <li><strong>Abstraction:</strong> Hiding complex implementation details.</li>
+            </ul>
+            <pre><code>class Animal {
+public:
+    void sound() {
+        cout << "Animal makes a sound" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void sound() {
+        cout << "Dog barks" << endl;
+    }
+};</code></pre>
+        </div>
+
+        <!-- Block 6: Exception Handling -->
+        <div id="exceptions" class="section">
+            <h2>Exception Handling</h2>
+            <p>Exception handling in C++ is used to handle runtime errors and maintain the normal flow of the program.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Try-Catch Block:</strong> Catches and handles exceptions.</li>
+                <li><strong>Throw Keyword:</strong> Throws an exception when a problem occurs.</li>
+            </ul>
+            <pre><code>try {
+    if (b == 0) throw "Division by zero!";
+    int result = a / b;
+} catch (const char* msg) {
+    cout << "Error: " << msg << endl;
+}</code></pre>
+        </div>
+
+        <!-- Block 7: STL (Standard Template Library) -->
+        <div id="stl" class="section">
+            <h2>STL (Standard Template Library)</h2>
+            <p>The STL provides template classes and functions for data structures and algorithms.</p>
+            <p><strong>Key Components:</strong></p>
+            <ul>
+                <li><code>vector</code>: Dynamic array.</li>
+                <li><code>map</code>: Key-value pairs.</li>
+                <li><code>set</code>: Collection of unique elements.</li>
+                <li><code>algorithm</code>: Functions like <code>sort</code>, <code>find</code>, etc.</li>
+            </ul>
+            <pre><code>#include <vector>
+#include <algorithm>
+
+vector<int> numbers = {5, 3, 1, 4, 2};
+sort(numbers.begin(), numbers.end());</code></pre>
+        </div>
+
+        <!-- Block 8: Pointers & Memory Management -->
+        <div id="pointers" class="section">
+            <h2>Pointers & Memory Management</h2>
+            <p>Pointers are variables that store memory addresses. C++ allows direct memory management.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Pointer Declaration:</strong> <code>int* ptr;</code></li>
+                <li><strong>Dynamic Memory Allocation:</strong> <code>new</code> and <code>delete</code>.</li>
+            </ul>
+            <pre><code>int* ptr = new int(10);
+cout << *ptr << endl; // Output: 10
+delete ptr;</code></pre>
+        </div>
+
+        <!-- Block 9: Templates -->
+        <div id="templates" class="section">
+            <h2>Templates</h2>
+            <p>Templates allow you to write generic and reusable code.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Function Templates:</strong> Generic functions.</li>
+                <li><strong>Class Templates:</strong> Generic classes.</li>
+            </ul>
+            <pre><code>template <typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+cout << add(5, 10) << endl; // Output: 15
+cout << add(3.14, 2.71) << endl; // Output: 5.85</code></pre>
+        </div>
+
+        <!-- Block 10: File Handling -->
+        <div id="files" class="section">
+            <h2>File Handling</h2>
+            <p>C++ provides file handling capabilities using the <code>fstream</code> library.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Opening a File:</strong> <code>ifstream</code>, <code>ofstream</code>.</li>
+                <li><strong>Reading/Writing:</strong> <code>>></code>, <code><<</code>.</li>
+            </ul>
+            <pre><code>#include <fstream>
+
+ofstream file("example.txt");
+file << "Hello, File Handling!";
+file.close();</code></pre>
+        </div>
+
+        <!-- Block 11: Multithreading -->
+        <div id="multithreading" class="section">
+            <h2>Multithreading</h2>
+            <p>C++ supports multithreading using the <code><thread></code> library.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Creating Threads:</strong> <code>std::thread</code>.</li>
+                <li><strong>Synchronization:</strong> <code>std::mutex</code>.</li>
+            </ul>
+            <pre><code>#include <thread>
+#include <iostream>
+
+void printHello() {
+    cout << "Hello from thread!" << endl;
+}
+
+int main() {
+    thread t(printHello);
+    t.join();
+    return 0;
+}</code></pre>
+        </div>
+        <div id="move-semantics" class="section">
+            <h2>Move Semantics </h2>
+            <p>Optimize resource management by transferring ownership instead of copying.</p>
+            <pre><code>class Buffer {
+                int* data;
+                public:
+                Buffer(Buffer&& other) noexcept : data(other.data) {
+                    other.data = nullptr;  // Transfer ownership
+                }
+            };
+        </code>
+    </pre>
+</div>
+<div id="smart-pointers" class="section">
+    <h2>Smart Pointers</h2>
+    <p>Automatic memory management:</p>
+    <ul>
+        <li><code>unique_ptr</code>: Exclusive ownership</li>
+        <li><code>shared_ptr</code>: Shared ownership</li>
+        <li><code>weak_ptr</code>: Non-owning references</li>
+    </ul>
+    <pre><code>auto ptr = make_shared<int>(42);
+weak_ptr<int> observer = ptr;</code></pre>
+</div>
+
+<div id="lambda" class="section">
+    <h2>Lambda Expressions</h2>
+    <p>Anonymous functions with capture lists:</p>
+    <pre><code>auto adder = [capture](int x) -> return_type {
+// function body
+};
+
+vector<int> nums {1,2,3};
+transform(nums.begin(), nums.end(), 
+  [](int x) { return x * 2; });</code></pre>
+</div>
+
+<div id="concurrency" class="section">
+    <h2>Concurrency</h2>
+    <p>Modern threading and async operations:</p>
+    <pre><code>#include <future>
+auto future = async(launch::async, []{
+return some_long_computation();
+});
+// Do other work
+auto result = future.get();</code></pre>
+</div>
+
+<div id="metaprogramming" class="section">
+    <h2>Template Metaprogramming</h2>
+    <p>Compile-time computation and type manipulation:</p>
+    <pre><code>template<typename T>
+constexpr auto factorial(T n) {
+return n <= 1 ? 1 : n * factorial(n-1);
+}
+
+static_assert(factorial(5) == 120);  // Compile-time check</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

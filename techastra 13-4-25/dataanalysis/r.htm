@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">R Tutorial</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>R Tutorial</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#variables">Variables & Data Types</a>
+        <a href="#operators">Operators</a>
+        <a href="#control">Control Flow</a>
+        <a href="#functions">Functions</a>
+        <a href="#vectors">Vectors</a>
+        <a href="#matrices">Matrices</a>
+        <a href="#dataframes">DataFrames</a>
+        <a href="#lists">Lists</a>
+        <a href="#factors">Factors</a>
+        <a href="#files">File Handling</a>
+        <a href="#exceptions">Exception Handling</a>
+        <a href="#packages">Packages</a>
+        <a href="#data-manipulation">Data Manipulation</a>
+        <a href="#data-visualization">Data Visualization</a>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- Block 1: Introduction -->
+        <div id="intro" class="section">
+            <h2>Introduction to R</h2>
+            <p>R is a programming language and environment specifically designed for statistical computing and data analysis. It is widely used in data science, machine learning, and research.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Statistical Analysis:</strong> R has built-in support for statistical modeling and analysis.</li>
+                <li><strong>Data Visualization:</strong> R provides powerful libraries like <code>ggplot2</code> for creating visualizations.</li>
+                <li><strong>Open Source:</strong> R is free to use and has a large community of contributors.</li>
+                <li><strong>Extensibility:</strong> R supports packages for extending its functionality.</li>
+            </ul>
+            <pre><code>print("Hello, World!")</code></pre>
+        </div>
+
+        <!-- Block 2: Variables & Data Types -->
+        <div id="variables" class="section">
+            <h2>Variables & Data Types</h2>
+            <p>Variables are used to store data in R. R is dynamically typed, meaning you don't need to declare the type of a variable.</p>
+            <p><strong>Data Types:</strong></p>
+            <ul>
+                <li><strong>Primitive Types:</strong> <code>numeric</code>, <code>integer</code>, <code>character</code>, <code>logical</code>.</li>
+                <li><strong>Non-Primitive Types:</strong> <code>vector</code>, <code>matrix</code>, <code>data.frame</code>, <code>list</code>.</li>
+            </ul>
+            <pre><code>name <- "John"  # Character
+age <- 25      # Numeric
+is_student <- TRUE  # Logical</code></pre>
+        </div>
+
+        <!-- Block 3: Operators -->
+        <div id="operators" class="section">
+            <h2>Operators</h2>
+            <p>R provides various types of operators for performing operations on variables and values.</p>
+            <p><strong>Types of Operators:</strong></p>
+            <ul>
+                <li><strong>Arithmetic Operators:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%%</code>, <code>^</code>.</li>
+                <li><strong>Comparison Operators:</strong> <code>==</code>, <code>!=</code>, <code>></code>, <code><</code>, <code>>=</code>, <code><=</code>.</li>
+                <li><strong>Logical Operators:</strong> <code>&</code>, <code>|</code>, <code>!</code>.</li>
+                <li><strong>Assignment Operators:</strong> <code><-</code>, <code>=</code>.</li>
+            </ul>
+            <pre><code>a <- 10
+b <- 5
+sum <- a + b  # Arithmetic
+is_equal <- a == b  # Comparison
+result <- a > 5 & b < 10  # Logical
+a <- a + 5  # Assignment</code></pre>
+        </div>
+
+        <!-- Block 4: Control Flow -->
+        <div id="control" class="section">
+            <h2>Control Flow</h2>
+            <p>Control flow statements allow you to control the execution of your program based on conditions or loops.</p>
+            <p><strong>Types of Control Flow Statements:</strong></p>
+            <ul>
+                <li><strong>If-Else:</strong> Executes a block of code if a condition is true.</li>
+                <li><strong>Loops:</strong> Repeats a block of code while a condition is true (e.g., <code>for</code>, <code>while</code>).</li>
+            </ul>
+            <pre><code>age <- 18
+if (age >= 18) {
+    print("You are an adult.")
+} else {
+    print("You are a minor.")
+}</code></pre>
+        </div>
+
+        <!-- Block 5: Functions -->
+        <div id="functions" class="section">
+            <h2>Functions</h2>
+            <p>Functions are reusable blocks of code that perform a specific task.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Function Definition:</strong> Use the <code>function</code> keyword.</li>
+                <li><strong>Arguments:</strong> Pass data to functions.</li>
+                <li><strong>Return Values:</strong> Functions can return data using the <code>return</code> keyword.</li>
+            </ul>
+            <pre><code>greet <- function(name) {
+    return(paste("Hello,", name))
+}
+
+print(greet("John"))  # Output: Hello, John</code></pre>
+        </div>
+
+        <!-- Block 6: Vectors -->
+        <div id="vectors" class="section">
+            <h2>Vectors</h2>
+            <p>Vectors are the most basic data structure in R. They store elements of the same type.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Atomic Vectors:</strong> Contain elements of the same type.</li>
+                <li><strong>Indexing:</strong> Access elements using indices.</li>
+                <li><strong>Operations:</strong> Arithmetic and logical operations can be performed on vectors.</li>
+            </ul>
+            <pre><code>numbers <- c(1, 2, 3, 4, 5)
+print(numbers[1])  # Output: 1</code></pre>
+        </div>
+
+        <!-- Block 7: Matrices -->
+        <div id="matrices" class="section">
+            <h2>Matrices</h2>
+            <p>Matrices are two-dimensional data structures that store elements of the same type.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Dimensions:</strong> Matrices have rows and columns.</li>
+                <li><strong>Indexing:</strong> Access elements using row and column indices.</li>
+            </ul>
+            <pre><code>matrix_data <- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2)
+print(matrix_data)</code></pre>
+        </div>
+
+        <!-- Block 8: DataFrames -->
+        <div id="dataframes" class="section">
+            <h2>DataFrames</h2>
+            <p>DataFrames are used to store tabular data in R. They are similar to tables in a database.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Columns:</strong> Can contain different data types.</li>
+                <li><strong>Rows:</strong> Represent individual records.</li>
+            </ul>
+            <pre><code>df <- data.frame(
+    name = c("John", "Jane"),
+    age = c(25, 30)
+)
+print(df)</code></pre>
+        </div>
+
+        <!-- Block 9: Lists -->
+        <div id="lists" class="section">
+            <h2>Lists</h2>
+            <p>Lists are used to store collections of objects, which can be of different types.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Heterogeneous:</strong> Lists can contain elements of different types.</li>
+                <li><strong>Indexing:</strong> Access elements using indices.</li>
+            </ul>
+            <pre><code>my_list <- list(name = "John", age = 25, is_student = TRUE)
+print(my_list$name)  # Output: John</code></pre>
+        </div>
+
+        <!-- Block 10: Factors -->
+        <div id="factors" class="section">
+            <h2>Factors</h2>
+            <p>Factors are used to represent categorical data in R.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Levels:</strong> Factors have predefined levels.</li>
+                <li><strong>Ordered Factors:</strong> Levels can be ordered.</li>
+            </ul>
+            <pre><code>gender <- factor(c("Male", "Female", "Male"))
+print(gender)</code></pre>
+        </div>
+
+        <!-- Block 11: File Handling -->
+        <div id="files" class="section">
+            <h2>File Handling</h2>
+            <p>R provides functions for reading from and writing to files.</p>
+            <p><strong>Key Functions:</strong></p>
+            <ul>
+                <li><strong>Reading Files:</strong> <code>read.csv()</code>, <code>read.table()</code>.</li>
+                <li><strong>Writing Files:</strong> <code>write.csv()</code>, <code>write.table()</code>.</li>
+            </ul>
+            <pre><code># Writing to a file
+write.csv(df, "data.csv")
+
+# Reading from a file
+data <- read.csv("data.csv")
+print(data)</code></pre>
+        </div>
+
+        <!-- Block 12: Exception Handling -->
+        <div id="exceptions" class="section">
+            <h2>Exception Handling</h2>
+            <p>Exception handling in R is used to handle runtime errors and maintain the normal flow of the program.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Try-Catch Block:</strong> Use <code>tryCatch()</code> to handle exceptions.</li>
+            </ul>
+            <pre><code>tryCatch({
+    result <- 10 / 0
+}, error = function(e) {
+    print("Cannot divide by zero!")
+})</code></pre>
+        </div>
+
+        <!-- Block 13: Packages -->
+        <div id="packages" class="section">
+            <h2>Packages</h2>
+            <p>Packages are collections of R functions, data, and documentation.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Install Packages:</strong> Use <code>install.packages()</code>.</li>
+                <li><strong>Load Packages:</strong> Use <code>library()</code>.</li>
+            </ul>
+            <pre><code>install.packages("dplyr")
+library(dplyr)</code></pre>
+        </div>
+
+        <!-- Block 14: Data Manipulation -->
+        <div id="data-manipulation" class="section">
+            <h2>Data Manipulation</h2>
+            <p>R provides powerful tools for data manipulation, such as the <code>dplyr</code> package.</p>
+            <p><strong>Key Functions:</strong></p>
+            <ul>
+                <li><strong>Filter:</strong> <code>filter()</code>.</li>
+                <li><strong>Select:</strong> <code>select()</code>.</li>
+                <li><strong>Mutate:</strong> <code>mutate()</code>.</li>
+            </ul>
+            <pre><code>library(dplyr)
+filtered_data <- filter(df, age > 25)
+print(filtered_data)</code></pre>
+        </div>
+
+        <!-- Block 15: Data Visualization -->
+        <div id="data-visualization" class="section">
+            <h2>Data Visualization</h2>
+            <p>R provides powerful libraries like <code>ggplot2</code> for creating visualizations.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>ggplot2:</strong> A popular library for creating complex visualizations.</li>
+                <li><strong>Base R Plotting:</strong> Simple plotting functions like <code>plot()</code>.</li>
+            </ul>
+            <pre><code>library(ggplot2)
+ggplot(df, aes(x = name, y = age)) + geom_bar(stat = "identity")</code></pre>
+        </div>
+    </div>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

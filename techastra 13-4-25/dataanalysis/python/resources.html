@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python for Data Analysis Knowledge Base</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Navbar Styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 6%;
+            background: #252a57;
+            box-shadow: 0 4px 8px rgba(75, 73, 73, 0.5);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav img {
+            width: 150px;
+        }
+
+        .nav-links {
+            flex: 1;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .nav-links ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links ul li:hover a {
+            color: #4d5b9b;
+        }
+        .nav-links ul li::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #5e64a1;
+    display: block;
+    margin: auto;
+    transition: width 0.3s;
+}
+
+.nav-links ul li:hover::after {
+    width: 100%;
+}
+
+        /* Sidebar Toggle Button */
+        #sidebar-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #34427ead;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+
+        /* Header Styles */
+        #header {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 60px;
+        }
+
+         /* Sidebar Styles */
+         #sidebar {
+            width: 250px;
+            background: #ffffff;
+            padding: 15px;
+            height: 1000vh;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            border-right: 2px solid #0077b6;
+            overflow-y: visible;
+            transition: left 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar.open {
+            left: 0;
+        }
+
+        #sidebar h3 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0077b6;
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: #303870;
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8;
+        }
+
+        /* Adjust Content when Sidebar Opens */
+        #content {
+            margin-left: 20px;
+            padding: 20px;
+            margin-top: 10px;
+            transition: margin-left 0.3s ease;
+            overflow-y: scroll;
+        }
+
+        #sidebar.open ~ #content {
+            margin-left: 270px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #303870 /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2,h1,h3,h4,h5,h6 {
+            color: #303870; /* Blue headings */
+        }
+        .auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    background-color: #303870;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+    background-color: #1b1f3d;
+}
+        /* Footer Styles */
+        #footer {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+            position: -webkit-sticky;
+        }
+        .footer-a:hover{
+            color: #19cfc6;
+        }
+        /* Main Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    color: #fff;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Nested Dropdown */
+  .nested-dropdown {
+    position: relative;
+  }
+  
+  .nested-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 100%; /* Position the nested dropdown to the right of the parent */
+    top: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .nested-dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .nested-dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .nested-dropdown:hover .nested-dropdown-content {
+    display: block;
+  }
+    </style>
+</head>
+<body>
+    <nav>
+        <button id="sidebar-toggle">☰</button>
+        <img src="/techastraa/logo4.png" alt="Logo">
+        <div class="nav-links">
+            <ul>
+               <li><a href="/post_login.php">HOME</a></li>
+               <li><a href="/privacy.html" target="_blank">POLICY</a></li>
+               <li class="dropdown">
+                 <a href="#" class="dropbtn">COURSES</a> <!-- Main Dropdown -->
+                 <div class="dropdown-content">
+                   <!-- Microsoft Office -->
+                   <div class="nested-dropdown">
+                     <a href="#">Microsoft Office</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="#" target="_blank" >Word</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">Excel</a>
+                       <a href="#" target="_blank">Advanced Excel</a>
+                       <a href="#" target="_blank" >PowerPoint</a>
+                     </div>
+                   </div>
+               
+                   <!-- Web Development -->
+                   <div class="nested-dropdown">
+                     <a href="#">Web Development</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="/techastraa/webdev/ht.html" target="_blank" >HTML</a>
+                       <a href="/techastraa/webdev/css.html" target="_blank" >CSS</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">JavaScript</a>
+                       <a href="/techastraa/webdev/bootstrap/bootstrap.html" target="_blank" >Bootstrap</a>
+                     </div>
+                   </div>
+               
+                   <!-- App Development -->
+   <div class="nested-dropdown">
+     <a href="#">App Development</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/appdevelopment/kotlin.html" target="_blank">Kotlin</a>
+       <a href="#" target="_blank">Java</a>
+       <a href="/techastraa/appdevelopment/swift.html" target="_blank">Swift</a>
+     </div>
+   </div>
+
+   <!-- Data Analysis -->
+   <div class="nested-dropdown">
+     <a href="#">Data Analysis</a>
+     <div class="nested-dropdown-content">
+       <a href="python.html" >Python</a>
+       <a href="/techastraa/dataanalysis/r.htm" target="_blank">R</a>
+     </div>
+   </div>
+
+   <!-- Backend Languages -->
+   <div class="nested-dropdown">
+     <a href="#">Backend Languages</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/backend/python.htm" target="_blank">Python</a>
+       <a href="/techastraa/backend/java.htm" target="_blank">Java</a>
+       <a href="/techastraa/backend/C++.htm" target="_blank">C++</a>
+       <a href="/techastraa/backend/javascript.htm" target="_blank">JavaScript</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PHP</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Ruby</a>
+       <a href="/techastraa/clarisse.html" target="_blank">C#/.NET</a>
+     </div>
+   </div>
+
+   <!-- DSA -->
+   <a href="/techastraa/DSA.htm" target="_blank">DSA</a>
+
+   <!-- DBMS -->
+   <div class="nested-dropdown">
+     <a href="#">DBMS</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/clarisse.html" target="_blank" >SQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">MySQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PostgreSQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Oracle</a>
+                 </div>
+               </li>
+               <li><a href="mailto:teamtechashtra@hmail.com" >CONTACT US</a></li>
+            </ul>
+          </div>
+        <div class="auth-buttons">
+            <a href="/techastraa/logout.php"><button class="login">LOGOUT</button></a>
+            <a href="register.html"><button class="register">Register</button></a>
+           </div>
+    </nav>
+    
+    <div id="header">Python for Data Analysis</div>
+    
+    <div id="sidebar">
+        <br><br>
+        <h3>Menu</h3>
+        <a href="python.html" target="_blank">Introduction</a></li>
+        <a href="installation.html" target="_blank">Installation</a></li>
+        <a href="pandas.html" target="_blank">Pandas</a></li>
+        <a href="numpy.html" target="_blank" >NumPy</a></li>
+        <a href="matplotlib.html" target="_blank">Matplotlib</a></li>
+        <a href="seaborn.html" target="_blank">Seaborn</a></li>
+        <a href="scikitlearn.html" target="_blank">Scikit-learn</a></li>
+        <a href="projects.html" target="_blank">Data Analysis Projects</a></li>
+        <a href="resources.html" >Resources</a></li>
+</div>
+
+            <div id="content">
+                <section id="resources" class="section">
+                        <h2>Resources for Python for Data Analysis</h2>
+                        <p>Learning Python for data analysis requires access to high-quality resources, including books, online courses, tutorials, datasets, and communities. This section provides a curated list of resources to help you master Python and its libraries for data analysis.</p>
+                    
+                        <h3>1. Books</h3>
+                        <p>Books are an excellent way to gain in-depth knowledge about Python and data analysis. Here are some highly recommended ones:</p>
+                        <ul>
+                            <li><strong>"Python for Data Analysis" by Wes McKinney</strong>
+                                <ul>
+                                    <li>Written by the creator of Pandas, this book is a must-read for anyone interested in data analysis with Python.</li>
+                                    <li>Covers NumPy, Pandas, Matplotlib, and other essential libraries.</li>
+                                    <li>Includes practical examples and real-world datasets.</li>
+                                </ul>
+                            </li>
+                            <li><strong>"Automate the Boring Stuff with Python" by Al Sweigart</strong>
+                                <ul>
+                                    <li>A beginner-friendly book that introduces Python programming with practical examples.</li>
+                                    <li>Focuses on automating repetitive tasks, which is useful for data cleaning and preprocessing.</li>
+                                </ul>
+                            </li>
+                            <li><strong>"Data Science from Scratch" by Joel Grus</strong>
+                                <ul>
+                                    <li>Explains the fundamentals of data science, including Python programming, statistics, and machine learning.</li>
+                                    <li>Builds algorithms and models from scratch to deepen your understanding.</li>
+                                </ul>
+                            </li>
+                            <li><strong>"Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow" by Aurélien Géron</strong>
+                                <ul>
+                                    <li>Focuses on machine learning with Scikit-learn and deep learning frameworks like TensorFlow and Keras.</li>
+                                    <li>Includes hands-on projects and practical examples.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    
+                        <h3>2. Online Courses</h3>
+                        <p>Online courses provide structured learning paths with video lectures, quizzes, and hands-on projects.</p>
+                        <h4>Free Courses</h4>
+                        <ul>
+                            <li><strong>"Python for Data Science and Machine Learning Bootcamp" (Udemy - Free with Coupons)</strong>
+                                <ul>
+                                    <li>Covers Python basics, NumPy, Pandas, Matplotlib, Seaborn, and Scikit-learn.</li>
+                                    <li>Includes hands-on exercises and projects.</li>
+                                </ul>
+                            </li>
+                            <li><strong>"Introduction to Data Analysis Using Python" (edX - Microsoft)</strong>
+                                <ul>
+                                    <li>A free course that teaches data analysis with Python using real-world datasets.</li>
+                                    <li>Focuses on Pandas and visualization libraries.</li>
+                                </ul>
+                            </li>
+                            <li><strong>"DataCamp" (Free Trial Available)</strong>
+                                <ul>
+                                    <li>Offers interactive courses on Python, Pandas, NumPy, and data visualization.</li>
+                                    <li>Includes gamified exercises and projects.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <h4>Paid Courses</h4>
+                        <ul>
+                            <li><strong>"Applied Data Science with Python Specialization" (Coursera - University of Michigan)</strong>
+                                <ul>
+                                    <li>A comprehensive specialization covering data analysis, visualization, and machine learning.</li>
+                                    <li>Uses Python libraries like Pandas, Matplotlib, and Scikit-learn.</li>
+                                </ul>
+                            </li>
+                            <li><strong>"Python for Data Science and AI" (Coursera - IBM)</strong>
+                                <ul>
+                                    <li>Part of the IBM Data Science Professional Certificate.</li>
+                                    <li>Covers Python basics, data analysis, and machine learning.</li>
+                                </ul>
+                            </li>
+                            <li><strong>"Machine Learning with Python" (Coursera - Andrew Ng)</strong>
+                                <ul>
+                                    <li>A foundational course on machine learning using Python and Scikit-learn.</li>
+                                    <li>Taught by one of the pioneers in the field.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    
+                        <h3>3. Tutorials and Documentation</h3>
+                        <p>Official documentation and tutorials are invaluable for learning and troubleshooting.</p>
+                        <h4>Official Documentation</h4>
+                        <ul>
+                            <li><a href="https://numpy.org/doc/">NumPy Documentation</a></li>
+                            <li><a href="https://pandas.pydata.org/docs/">Pandas Documentation</a></li>
+                            <li><a href="https://matplotlib.org/stable/contents.html">Matplotlib Documentation</a></li>
+                            <li><a href="https://seaborn.pydata.org/">Seaborn Documentation</a></li>
+                            <li><a href="https://scikit-learn.org/stable/">Scikit-learn Documentation</a></li>
+                        </ul>
+                        <h4>Tutorials</h4>
+                        <ul>
+                            <li><a href="https://realpython.com/">Real Python</a>: Offers high-quality tutorials on Python programming and data analysis.</li>
+                            <li><a href="https://towardsdatascience.com/">Towards Data Science (Medium)</a>: Articles and tutorials on data science, machine learning, and Python.</li>
+                            <li><a href="https://www.kaggle.com/learn">Kaggle Learn</a>: Free, interactive tutorials on Python, Pandas, and machine learning.</li>
+                        </ul>
+                    
+                        <h3>4. Datasets</h3>
+                        <p>Working with real-world datasets is crucial for practicing data analysis.</p>
+                        <h4>Popular Dataset Repositories</h4>
+                        <ul>
+                            <li><a href="https://www.kaggle.com/datasets">Kaggle Datasets</a>: A vast collection of datasets for various domains (e.g., healthcare, finance, sports).</li>
+                            <li><a href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a>: A repository of datasets for machine learning and data analysis.</li>
+                            <li><a href="https://datasetsearch.research.google.com/">Google Dataset Search</a>: A search engine for finding datasets across the web.</li>
+                            <li><a href="https://github.com/awesomedata/awesome-public-datasets">Awesome Public Datasets</a>: A curated list of public datasets categorized by domain.</li>
+                        </ul>
+                        <h4>Sample Datasets</h4>
+                        <ul>
+                            <li><strong>Titanic Dataset</strong>: Analyze passenger survival rates.</li>
+                            <li><strong>Iris Dataset</strong>: Perform classification and clustering tasks.</li>
+                            <li><strong>Superstore Sales Dataset</strong>: Analyze sales trends and profitability.</li>
+                            <li><strong>Boston Housing Dataset</strong>: Predict house prices based on features.</li>
+                        </ul>
+                    
+                        <h3>5. Communities and Forums</h3>
+                        <p>Engaging with communities helps you learn faster and solve problems collaboratively.</p>
+                        <h4>Forums</h4>
+                        <ul>
+                            <li><a href="https://stackoverflow.com/">Stack Overflow</a>: Ask questions and find answers related to Python and data analysis.</li>
+                            <li><a href="https://www.reddit.com/r/datascience/">Reddit (r/datascience, r/learnpython)</a>: Join discussions and share resources with like-minded individuals.</li>
+                            <li><a href="https://www.kaggle.com/discussion">Kaggle Discussions</a>: Participate in forums related to Kaggle competitions and datasets.</li>
+                        </ul>
+                        <h4>Social Media</h4>
+                        <ul>
+                            <li><strong>LinkedIn Groups</strong>: Join groups like "Data Science Central" or "Python Developers Community."</li>
+                            <li><strong>Twitter</strong>: Follow data scientists and Python developers for updates and insights.</li>
+                        </ul>
+                    
+                        <h3>6. Tools and Platforms</h3>
+                        <p>Using the right tools can significantly enhance your productivity.</p>
+                        <h4>Integrated Development Environments (IDEs)</h4>
+                        <ul>
+                            <li><strong>Jupyter Notebook</strong>: Ideal for interactive data analysis and visualization.</li>
+                            <li><strong>Google Colab</strong>: A cloud-based Jupyter Notebook environment with free GPU access.</li>
+                            <li><strong>VS Code</strong>: A versatile code editor with extensions for Python and data science.</li>
+                        </ul>
+                        <h4>Visualization Tools</h4>
+                        <ul>
+                            <li><strong>Plotly/Dash</strong>: For creating interactive visualizations.</li>
+                            <li><strong>Tableau/Public</strong>: For advanced business intelligence dashboards.</li>
+                        </ul>
+                        <h4>Cloud Platforms</h4>
+                        <ul>
+                            <li><strong>Google Cloud Platform (GCP)</strong>: Offers tools for big data and machine learning.</li>
+                            <li><strong>AWS SageMaker</strong>: A platform for building, training, and deploying machine learning models.</li>
+                        </ul>
+                    
+                        <h3>7. Tips for Effective Learning</h3>
+                        <ul>
+                            <li><strong>Practice Regularly</strong>: Work on small projects daily to reinforce your skills.</li>
+                            <li><strong>Build a Portfolio</strong>: Showcase your projects on GitHub or Kaggle.</li>
+                            <li><strong>Collaborate</strong>: Participate in hackathons or open-source projects to gain experience.</li>
+                            <li><strong>Stay Updated</strong>: Follow blogs, podcasts, and newsletters like "Data Elixir" or "KDnuggets."</li>
+                        </ul>
+                    </section>
+                    </div>
+                    <div id="footer">&copy; 2025 Tech Astra | <a href="/terms.html" id="footer" target="_blank">Terms</a> |<a href="/privacy.html" id="footer" target="_blank"> Privacy Policy</a></div>
+
+    <script>
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            let sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
+                
+                    

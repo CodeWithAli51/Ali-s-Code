@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">HTML Tutorial</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>HTML Tutorial</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#basics">HTML Basics</a>
+        <a href="#elements">HTML Elements</a>
+        <a href="#attributes">HTML Attributes</a>
+        <a href="#headings">Headings</a>
+        <a href="#paragraphs">Paragraphs</a>
+        <a href="#links">Links</a>
+        <a href="#images">Images</a>
+        <a href="#lists">Lists</a>
+        <a href="#tables">Tables</a>
+        <a href="#forms">Forms</a>
+        <a href="#semantic">Semantic HTML</a>
+        <a href="#multimedia">Multimedia</a>
+        <a href="#accessibility">Accessibility</a>
+        <a href="#best-practices">Best Practices</a>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- Block 1: Introduction -->
+        <div id="intro" class="section">
+            <h2>Introduction to HTML</h2>
+            <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It describes the structure of a web page and consists of a series of elements.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Structure:</strong> HTML defines the structure of a web page.</li>
+                <li><strong>Elements:</strong> HTML elements are the building blocks of a web page.</li>
+                <li><strong>Tags:</strong> HTML uses tags to define elements.</li>
+                <li><strong>Cross-Platform:</strong> HTML works on all browsers and devices.</li>
+            </ul>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My First Web Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <!-- Block 2: HTML Basics -->
+        <div id="basics" class="section">
+            <h2>HTML Basics</h2>
+            <p>HTML documents are made up of elements, which are defined by tags. Tags are enclosed in angle brackets (<code>&lt; &gt;</code>).</p>
+            <p><strong>Basic Structure:</strong></p>
+            <ul>
+                <li><strong>DOCTYPE:</strong> Declares the document type and version of HTML.</li>
+                <li><strong>html:</strong> The root element of an HTML document.</li>
+                <li><strong>head:</strong> Contains meta-information about the document.</li>
+                <li><strong>body:</strong> Contains the content of the document.</li>
+            </ul>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;This is a Heading&lt;/h1&gt;
+    &lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <!-- Block 3: HTML Elements -->
+        <div id="elements" class="section">
+            <h2>HTML Elements</h2>
+            <p>HTML elements are the building blocks of a web page. They consist of a start tag, content, and an end tag.</p>
+            <p><strong>Example:</strong></p>
+            <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+            <p><strong>Common Elements:</strong></p>
+            <ul>
+                <li><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>: Headings.</li>
+                <li><code>&lt;p&gt;</code>: Paragraphs.</li>
+                <li><code>&lt;a&gt;</code>: Links.</li>
+                <li><code>&lt;img&gt;</code>: Images.</li>
+            </ul>
+        </div>
+
+        <!-- Block 4: HTML Attributes -->
+        <div id="attributes" class="section">
+            <h2>HTML Attributes</h2>
+            <p>Attributes provide additional information about HTML elements. They are always specified in the start tag.</p>
+            <p><strong>Common Attributes:</strong></p>
+            <ul>
+                <li><code>id</code>: Specifies a unique ID for an element.</li>
+                <li><code>class</code>: Specifies one or more class names for an element.</li>
+                <li><code>src</code>: Specifies the source URL for an image.</li>
+                <li><code>href</code>: Specifies the URL for a link.</li>
+            </ul>
+            <pre><code>&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;</code></pre>
+        </div>
+
+        <!-- Block 5: Headings -->
+        <div id="headings" class="section">
+            <h2>Headings</h2>
+            <p>Headings are used to define the structure of a web page. There are six levels of headings, from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>.</p>
+            <pre><code>&lt;h1&gt;Main Heading&lt;/h1&gt;
+&lt;h2&gt;Subheading&lt;/h2&gt;
+&lt;h3&gt;Sub-subheading&lt;/h3&gt;</code></pre>
+        </div>
+
+        <!-- Block 6: Paragraphs -->
+        <div id="paragraphs" class="section">
+            <h2>Paragraphs</h2>
+            <p>Paragraphs are used to group text content. They are defined using the <code>&lt;p&gt;</code> tag.</p>
+            <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;</code></pre>
+        </div>
+
+        <!-- Block 7: Links -->
+        <div id="links" class="section">
+            <h2>Links</h2>
+            <p>Links are used to navigate between web pages. They are defined using the <code>&lt;a&gt;</code> tag.</p>
+            <pre><code>&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;</code></pre>
+        </div>
+
+        <!-- Block 8: Images -->
+        <div id="images" class="section">
+            <h2>Images</h2>
+            <p>Images are used to display pictures on a web page. They are defined using the <code>&lt;img&gt;</code> tag.</p>
+            <pre><code>&lt;img src="image.jpg" alt="Description of image"&gt;</code></pre>
+        </div>
+
+        <!-- Block 9: Lists -->
+        <div id="lists" class="section">
+            <h2>Lists</h2>
+            <p>Lists are used to group related items. There are two types of lists: ordered (<code>&lt;ol&gt;</code>) and unordered (<code>&lt;ul&gt;</code>).</p>
+            <pre><code>&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        </div>
+
+        <!-- Block 10: Tables -->
+        <div id="tables" class="section">
+            <h2>Tables</h2>
+            <p>Tables are used to display data in rows and columns. They are defined using the <code>&lt;table&gt;</code> tag.</p>
+            <pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Header 1&lt;/th&gt;
+        &lt;th&gt;Header 2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Row 1, Cell 1&lt;/td&gt;
+        &lt;td&gt;Row 1, Cell 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+        </div>
+
+        <!-- Block 11: Forms -->
+        <div id="forms" class="section">
+            <h2>Forms</h2>
+            <p>Forms are used to collect user input. They are defined using the <code>&lt;form&gt;</code> tag.</p>
+            <pre><code>&lt;form action="/submit" method="post"&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" id="name" name="name"&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;</code></pre>
+        </div>
+
+        <!-- Block 12: Semantic HTML -->
+        <div id="semantic" class="section">
+            <h2>Semantic HTML</h2>
+            <p>Semantic HTML uses meaningful tags to describe the content of a web page. Examples include <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, and <code>&lt;article&gt;</code>.</p>
+            <pre><code>&lt;header&gt;
+    &lt;h1&gt;Website Title&lt;/h1&gt;
+&lt;/header&gt;
+&lt;article&gt;
+    &lt;p&gt;This is an article.&lt;/p&gt;
+&lt;/article&gt;
+&lt;footer&gt;
+    &lt;p&gt;Footer content&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+        </div>
+
+        <!-- Block 13: Multimedia -->
+        <div id="multimedia" class="section">
+            <h2>Multimedia</h2>
+            <p>HTML supports multimedia elements like audio and video. They are defined using the <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> tags.</p>
+            <pre><code>&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+
+&lt;video controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+        </div>
+
+        <!-- Block 14: Accessibility -->
+        <div id="accessibility" class="section">
+            <h2>Accessibility</h2>
+            <p>Accessibility ensures that web pages are usable by everyone, including people with disabilities. Use semantic HTML and ARIA attributes to improve accessibility.</p>
+            <pre><code>&lt;button aria-label="Close"&gt;X&lt;/button&gt;</code></pre>
+        </div>
+
+        <!-- Block 15: Best Practices -->
+        <div id="best-practices" class="section">
+            <h2>Best Practices</h2>
+            <p>Follow these best practices to write clean and maintainable HTML:</p>
+            <ul>
+                <li>Use semantic HTML.</li>
+                <li>Always include the <code>alt</code> attribute for images.</li>
+                <li>Use lowercase for tags and attributes.</li>
+                <li>Close all tags properly.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

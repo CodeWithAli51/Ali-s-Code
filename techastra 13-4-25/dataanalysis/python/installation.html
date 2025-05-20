@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python for Data Analysis Knowledge Base</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Navbar Styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 6%;
+            background: #252a57;
+            box-shadow: 0 4px 8px rgba(75, 73, 73, 0.5);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav img {
+            width: 150px;
+        }
+
+        .nav-links {
+            flex: 1;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .nav-links ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links ul li:hover a {
+            color: #4d5b9b;
+        }
+        .nav-links ul li::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #5e64a1;
+    display: block;
+    margin: auto;
+    transition: width 0.3s;
+}
+
+.nav-links ul li:hover::after {
+    width: 100%;
+}
+
+        /* Sidebar Toggle Button */
+        #sidebar-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #34427ead;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+
+        /* Header Styles */
+        #header {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 60px;
+        }
+
+         /* Sidebar Styles */
+         #sidebar {
+            width: 250px;
+            background: #ffffff;
+            padding: 15px;
+            height: 1000vh;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            border-right: 2px solid #0077b6;
+            overflow-y: visible;
+            transition: left 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar.open {
+            left: 0;
+        }
+
+        #sidebar h3 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0077b6;
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: #303870;
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8;
+        }
+
+        /* Adjust Content when Sidebar Opens */
+        #content {
+            margin-left: 20px;
+            padding: 20px;
+            margin-top: 10px;
+            transition: margin-left 0.3s ease;
+            overflow-y: scroll;
+        }
+
+        #sidebar.open ~ #content {
+            margin-left: 270px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #303870 /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2,h1,h3,h4,h5,h6 {
+            color: #303870; /* Blue headings */
+        }
+        .auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    background-color: #303870;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+    background-color: #1b1f3d;
+}
+        /* Footer Styles */
+        #footer {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+            position: -webkit-sticky;
+        }
+        .footer-a:hover{
+            color: #19cfc6;
+        }
+        /* Main Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    color: #fff;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Nested Dropdown */
+  .nested-dropdown {
+    position: relative;
+  }
+  
+  .nested-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 100%; /* Position the nested dropdown to the right of the parent */
+    top: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .nested-dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .nested-dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .nested-dropdown:hover .nested-dropdown-content {
+    display: block;
+  }
+    </style>
+</head>
+<body>
+    <nav>
+        <button id="sidebar-toggle">☰</button>
+        <img src="/techastraa/logo4.png" alt="Logo">
+        <div class="nav-links">
+            <ul>
+               <li><a href="/post_login.php">HOME</a></li>
+               <li><a href="/privacy.html" target="_blank">POLICY</a></li>
+               <li class="dropdown">
+                 <a href="#" class="dropbtn">COURSES</a> <!-- Main Dropdown -->
+                 <div class="dropdown-content">
+                   <!-- Microsoft Office -->
+                   <div class="nested-dropdown">
+                     <a href="#">Microsoft Office</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="#" target="_blank" >Word</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">Excel</a>
+                       <a href="#" target="_blank">Advanced Excel</a>
+                       <a href="#" target="_blank" >PowerPoint</a>
+                     </div>
+                   </div>
+               
+                   <!-- Web Development -->
+                   <div class="nested-dropdown">
+                     <a href="#">Web Development</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="/techastraa/webdev/ht.html" target="_blank" >HTML</a>
+                       <a href="/techastraa/webdev/css.html" target="_blank" >CSS</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">JavaScript</a>
+                       <a href="/techastraa/webdev/bootstrap/bootstrap.html" target="_blank" >Bootstrap</a>
+                     </div>
+                   </div>
+               
+                   <!-- App Development -->
+   <div class="nested-dropdown">
+     <a href="#">App Development</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/appdevelopment/kotlin.html" target="_blank">Kotlin</a>
+       <a href="#" target="_blank">Java</a>
+       <a href="/techastraa/appdevelopment/swift.html" target="_blank">Swift</a>
+     </div>
+   </div>
+
+   <!-- Data Analysis -->
+   <div class="nested-dropdown">
+     <a href="#">Data Analysis</a>
+     <div class="nested-dropdown-content">
+       <a href="python.html" >Python</a>
+       <a href="/techastraa/dataanalysis/r.htm" target="_blank">R</a>
+     </div>
+   </div>
+
+   <!-- Backend Languages -->
+   <div class="nested-dropdown">
+     <a href="#">Backend Languages</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/backend/python.htm" target="_blank">Python</a>
+       <a href="/techastraa/backend/java.htm" target="_blank">Java</a>
+       <a href="/techastraa/backend/C++.htm" target="_blank">C++</a>
+       <a href="/techastraa/backend/javascript.htm" target="_blank">JavaScript</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PHP</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Ruby</a>
+       <a href="/techastraa/clarisse.html" target="_blank">C#/.NET</a>
+     </div>
+   </div>
+
+   <!-- DSA -->
+   <a href="/techastraa/DSA.htm" target="_blank">DSA</a>
+
+   <!-- DBMS -->
+   <div class="nested-dropdown">
+     <a href="#">DBMS</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/clarisse.html" target="_blank" >SQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">MySQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PostgreSQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Oracle</a>
+                 </div>
+               </li>
+               <li><a href="mailto:teamtechashtra@hmail.com" >CONTACT US</a></li>
+            </ul>
+          </div>
+        <div class="auth-buttons">
+            <a href="/techastraa/logout.php"><button class="login">LOGOUT</button></a>
+            <a href="register.html"><button class="register">Register</button></a>
+           </div>
+    </nav>
+    
+    <div id="header">Python for Data Analysis</div>
+    
+    <div id="sidebar">
+        <br><br>
+        <h3>Menu</h3>
+        <a href="python.html" target="_blank">Introduction</a></li>
+        <a href="installation.html">Installation</a></li>
+        <a href="pandas.html" target="_blank">Pandas</a></li>
+        <a href="numpy.html" target="_blank">NumPy</a></li>
+        <a href="matplotlib.html" target="_blank">Matplotlib</a></li>
+        <a href="seaborn.html" target="_blank">Seaborn</a></li>
+        <a href="scikitlearn.html" target="_blank">Scikit-learn</a></li>
+        <a href="projects.html" target="_blank">Data Analysis Projects</a></li>
+        <a href="resources.html" target="_blank">Resources</a></li>
+</div>
+    </div>
+        <div id="content">
+        <section id="installation" class="section">
+            <h2>Installation of Python for Data Analysis</h2>
+            <h3>Step 1: Install Python</h3>
+            <ol>
+                <li>Go to the official Python website: <a href="https://www.python.org/" target="_blank">https://www.python.org/</a>.</li>
+                <li>Navigate to the "Downloads" section.</li>
+                <li>Choose the appropriate installer for your operating system:
+                    <ul>
+                        <li><strong>Windows:</strong> Download the Windows installer (e.g., `python-3.x.x.exe`).</li>
+                        <li><strong>macOS:</strong> Download the macOS installer (e.g., `python-3.x.x.pkg`).</li>
+                        <li><strong>Linux:</strong> Python is often pre-installed on Linux systems. If not, use your package manager (e.g., `sudo apt install python3`).</li>
+                    </ul>
+                </li>
+                <li>Run the installer and follow the prompts.
+                    <ul>
+                        <li><strong>Important:</strong> During installation, check the box that says <strong>"Add Python to PATH"</strong> (this ensures you can run Python from the command line).</li>
+                    </ul>
+                </li>
+            </ol>
+            <h3>Option 2: Use Anaconda Distribution</h3>
+            <p>Anaconda is a popular distribution of Python that comes pre-installed with many data science libraries. It also includes Jupyter Notebook, an interactive environment for data analysis.</p>
+            <ol>
+                <li>Go to the Anaconda website: <a href="https://www.anaconda.com/" target="_blank">https://www.anaconda.com/</a>.</li>
+                <li>Download the installer for your operating system.</li>
+                <li>Run the installer and follow the prompts.</li>
+                <li>After installation, open the <strong>Anaconda Navigator</strong>, which provides access to tools like Jupyter Notebook and Spyder.</li>
+            </ol>
+            <h3>Step 2: Verify Python Installation</h3>
+            <p>To ensure Python is installed correctly, open a terminal (Command Prompt on Windows, Terminal on macOS/Linux) and type:</p>
+            <pre><code class="bash">
+python --version
+            </code></pre>
+            <p>You should see the version number of Python installed (e.g., <code>Python 3.x.x</code>).</p>
+            <h3>Step 3: Install Essential Libraries</h3>
+            <p>Install the following libraries using <code>pip</code>, Python's package manager:</p>
+            <pre><code class="bash">
+pip install numpy pandas matplotlib seaborn scikit-learn jupyter
+            </code></pre>
+            <h3>Explanation of Libraries</h3>
+            <ul>
+                <li><strong>NumPy:</strong> Provides support for arrays, matrices, and mathematical functions.</li>
+                <li><strong>Pandas:</strong> Offers tools for data manipulation and analysis, including DataFrames.</li>
+                <li><strong>Matplotlib:</strong> A plotting library for creating static, animated, and interactive visualizations.</li>
+                <li><strong>Seaborn:</strong> Built on top of Matplotlib, it provides a high-level interface for statistical data visualization.</li>
+                <li><strong>Scikit-learn:</strong> A library for machine learning and predictive modeling.</li>
+                <li><strong>Jupyter Notebook:</strong> An interactive environment for writing and running Python code.</li>
+            </ul>
+            <h3>Step 4: Launch Jupyter Notebook</h3>
+            <p>Jupyter Notebook is an excellent tool for data analysis because it allows you to write code, visualize data, and document your workflow in a single interface.</p>
+            <ol>
+                <li>Open a terminal and type:
+                    <pre><code class="bash">
+jupyter notebook
+                    </code></pre>
+                </li>
+                <li>This will launch Jupyter Notebook in your default web browser.</li>
+                <li>Create a new notebook by clicking <strong>"New" > "Python 3"</strong>.</li>
+            </ol>
+            <h3>Step 5: Test Your Setup</h3>
+            <p>To ensure everything is working, create a simple script in Jupyter Notebook:</p>
+            <pre><code class="python">
+# Import essential libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Create a NumPy array
+arr = np.array([1, 2, 3, 4, 5])
+print("NumPy Array:", arr)
+
+# Create a Pandas DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie'], 'Age': [25, 30, 35]}
+df = pd.DataFrame(data)
+print("Pandas DataFrame:")
+print(df)
+
+# Plot a simple graph
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Sample Plot')
+plt.show()
+            </code></pre>
+            <p>If the script runs without errors and displays the output, your setup is complete!</p>
+        </section>
+        </div>
+        <div id="footer">&copy; 2025 Tech Astra | <a href="/terms.html" id="footer" target="_blank">Terms</a> |<a href="/privacy.html" id="footer" target="_blank"> Privacy Policy</a></div>
+
+    <script>
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            let sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

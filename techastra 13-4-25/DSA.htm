@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">Data Structures and Algorithms Tutorial</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>DSA Tutorial</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#arrays">Arrays</a>
+        <a href="#linked-lists">Linked Lists</a>
+        <a href="#stacks">Stacks</a>
+        <a href="#queues">Queues</a>
+        <a href="#trees">Trees</a>
+        <a href="#graphs">Graphs</a>
+        <a href="#sorting">Sorting Algorithms</a>
+        <a href="#searching">Searching Algorithms</a>
+        <a href="#dynamic-programming">Dynamic Programming</a>
+        <a href="#recursion">Recursion</a>
+        <a href="#hashing">Hashing</a>
+        <a href="#greedy">Greedy Algorithms</a>
+        <a href="#backtracking">Backtracking</a>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- Block 1: Introduction -->
+        <div id="intro" class="section">
+            <h2>Introduction to Data Structures and Algorithms</h2>
+            <p>Data Structures and Algorithms (DSA) are the building blocks of efficient programming. They help in organizing and manipulating data effectively, enabling faster and more optimized solutions to problems.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Data Structures:</strong> Ways to organize and store data (e.g., arrays, linked lists, trees).</li>
+                <li><strong>Algorithms:</strong> Step-by-step procedures to solve problems (e.g., sorting, searching).</li>
+                <li><strong>Time Complexity:</strong> Measures how the runtime of an algorithm grows with input size.</li>
+                <li><strong>Space Complexity:</strong> Measures how much memory an algorithm uses.</li>
+            </ul>
+            <pre><code>// Example: Hello World in DSA
+console.log("Welcome to DSA!");</code></pre>
+        </div>
+
+        <!-- Block 2: Arrays -->
+        <div id="arrays" class="section">
+            <h2>Arrays</h2>
+            <p>Arrays are a collection of elements stored in contiguous memory locations. They are one of the simplest and most widely used data structures.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Fixed Size:</strong> The size of an array is fixed once declared.</li>
+                <li><strong>Random Access:</strong> Elements can be accessed directly using indices.</li>
+                <li><strong>Operations:</strong> Insertion, deletion, traversal, and searching.</li>
+            </ul>
+            <pre><code>// Example: Array in JavaScript
+let arr = [1, 2, 3, 4, 5];
+console.log(arr[2]); // Output: 3</code></pre>
+        </div>
+
+        <!-- Block 3: Linked Lists -->
+        <div id="linked-lists" class="section">
+            <h2>Linked Lists</h2>
+            <p>A linked list is a linear data structure where each element (node) contains data and a reference to the next node.</p>
+            <p><strong>Types of Linked Lists:</strong></p>
+            <ul>
+                <li><strong>Singly Linked List:</strong> Each node points to the next node.</li>
+                <li><strong>Doubly Linked List:</strong> Each node points to both the next and previous nodes.</li>
+                <li><strong>Circular Linked List:</strong> The last node points back to the first node.</li>
+            </ul>
+            <pre><code>// Example: Singly Linked List Node
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Block 4: Stacks -->
+        <div id="stacks" class="section">
+            <h2>Stacks</h2>
+            <p>A stack is a Last-In-First-Out (LIFO) data structure. Elements are added and removed from the top.</p>
+            <p><strong>Operations:</strong></p>
+            <ul>
+                <li><strong>Push:</strong> Add an element to the top.</li>
+                <li><strong>Pop:</strong> Remove the top element.</li>
+                <li><strong>Peek:</strong> View the top element without removing it.</li>
+            </ul>
+            <pre><code>// Example: Stack in JavaScript
+let stack = [];
+stack.push(1); // Push
+stack.push(2);
+console.log(stack.pop()); // Pop: Output: 2</code></pre>
+        </div>
+
+        <!-- Block 5: Queues -->
+        <div id="queues" class="section">
+            <h2>Queues</h2>
+            <p>A queue is a First-In-First-Out (FIFO) data structure. Elements are added at the rear and removed from the front.</p>
+            <p><strong>Operations:</strong></p>
+            <ul>
+                <li><strong>Enqueue:</strong> Add an element to the rear.</li>
+                <li><strong>Dequeue:</strong> Remove an element from the front.</li>
+                <li><strong>Peek:</strong> View the front element without removing it.</li>
+            </ul>
+            <pre><code>// Example: Queue in JavaScript
+let queue = [];
+queue.push(1); // Enqueue
+queue.push(2);
+console.log(queue.shift()); // Dequeue: Output: 1</code></pre>
+        </div>
+
+        <!-- Block 6: Trees -->
+        <div id="trees" class="section">
+            <h2>Trees</h2>
+            <p>A tree is a hierarchical data structure consisting of nodes, where each node has a parent and zero or more children.</p>
+            <p><strong>Types of Trees:</strong></p>
+            <ul>
+                <li><strong>Binary Tree:</strong> Each node has at most two children.</li>
+                <li><strong>Binary Search Tree (BST):</strong> A binary tree where the left child is smaller and the right child is larger.</li>
+                <li><strong>AVL Tree:</strong> A self-balancing BST.</li>
+            </ul>
+            <pre><code>// Example: Binary Tree Node
+class TreeNode {
+    constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Block 7: Graphs -->
+        <div id="graphs" class="section">
+            <h2>Graphs</h2>
+            <p>A graph is a collection of nodes (vertices) connected by edges. Graphs can be directed or undirected.</p>
+            <p><strong>Graph Representations:</strong></p>
+            <ul>
+                <li><strong>Adjacency Matrix:</strong> A 2D array where cell (i, j) represents an edge between nodes i and j.</li>
+                <li><strong>Adjacency List:</strong> An array of lists, where each list stores the neighbors of a node.</li>
+            </ul>
+            <pre><code>// Example: Graph using Adjacency List
+const graph = {
+    A: ["B", "C"],
+    B: ["A", "D"],
+    C: ["A", "D"],
+    D: ["B", "C"]
+};</code></pre>
+        </div>
+
+        <!-- Block 8: Sorting Algorithms -->
+        <div id="sorting" class="section">
+            <h2>Sorting Algorithms</h2>
+            <p>Sorting algorithms arrange elements in a specific order (e.g., ascending or descending).</p>
+            <p><strong>Common Sorting Algorithms:</strong></p>
+            <ul>
+                <li><strong>Bubble Sort:</strong> Repeatedly swaps adjacent elements if they are in the wrong order.</li>
+                <li><strong>Merge Sort:</strong> Divides the array into halves, sorts them, and merges them.</li>
+                <li><strong>Quick Sort:</strong> Picks a pivot and partitions the array around it.</li>
+            </ul>
+            <pre><code>// Example: Bubble Sort in JavaScript
+function bubbleSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]; // Swap
+            }
+        }
+    }
+    return arr;
+}</code></pre>
+        </div>
+
+        <!-- Block 9: Searching Algorithms -->
+        <div id="searching" class="section">
+            <h2>Searching Algorithms</h2>
+            <p>Searching algorithms are used to find an element in a data structure.</p>
+            <p><strong>Common Searching Algorithms:</strong></p>
+            <ul>
+                <li><strong>Linear Search:</strong> Checks each element sequentially.</li>
+                <li><strong>Binary Search:</strong> Efficiently searches a sorted array by repeatedly dividing the search interval in half.</li>
+            </ul>
+            <pre><code>// Example: Binary Search in JavaScript
+function binarySearch(arr, target) {
+    let left = 0, right = arr.length - 1;
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid] === target) return mid;
+        if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1; // Not found
+}</code></pre>
+        </div>
+
+        <!-- Block 10: Dynamic Programming -->
+        <div id="dynamic-programming" class="section">
+            <h2>Dynamic Programming</h2>
+            <p>Dynamic Programming (DP) is a technique to solve problems by breaking them into smaller subproblems and storing their results to avoid redundant calculations.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Memoization:</strong> Storing results of expensive function calls.</li>
+                <li><strong>Tabulation:</strong> Building a table to store results iteratively.</li>
+            </ul>
+            <pre><code>// Example: Fibonacci using DP
+function fibonacci(n, memo = {}) {
+    if (n in memo) return memo[n];
+    if (n <= 2) return 1;
+    memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+    return memo[n];
+}</code></pre>
+        </div>
+
+        <!-- Block 11: Recursion -->
+        <div id="recursion" class="section">
+            <h2>Recursion</h2>
+            <p>Recursion is a technique where a function calls itself to solve smaller instances of the same problem.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Base Case:</strong> The condition to stop recursion.</li>
+                <li><strong>Recursive Case:</strong> The function calls itself with a smaller input.</li>
+            </ul>
+            <pre><code>// Example: Factorial using Recursion
+function factorial(n) {
+    if (n === 0) return 1; // Base case
+    return n * factorial(n - 1); // Recursive case
+}</code></pre>
+        </div>
+
+        <!-- Block 12: Hashing -->
+        <div id="hashing" class="section">
+            <h2>Hashing</h2>
+            <p>Hashing is a technique to map data to a fixed-size array (hash table) for efficient retrieval.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Hash Function:</strong> Converts data into an index in the hash table.</li>
+                <li><strong>Collision Handling:</strong> Techniques like chaining or open addressing to handle collisions.</li>
+            </ul>
+            <pre><code>// Example: Simple Hash Function
+function hash(key, size) {
+    let hash = 0;
+    for (let char of key) {
+        hash += char.charCodeAt(0);
+    }
+    return hash % size;
+}</code></pre>
+        </div>
+
+        <!-- Block 13: Greedy Algorithms -->
+        <div id="greedy" class="section">
+            <h2>Greedy Algorithms</h2>
+            <p>Greedy algorithms make locally optimal choices at each step to find a global optimum.</p>
+            <p><strong>Applications:</strong></p>
+            <ul>
+                <li><strong>Knapsack Problem:</strong> Select items with maximum value without exceeding capacity.</li>
+                <li><strong>Dijkstra's Algorithm:</strong> Finds the shortest path in a graph.</li>
+            </ul>
+            <pre><code>// Example: Fractional Knapsack
+function fractionalKnapsack(items, capacity) {
+    items.sort((a, b) => b.value / b.weight - a.value / a.weight);
+    let totalValue = 0;
+    for (let item of items) {
+        if (capacity >= item.weight) {
+            capacity -= item.weight;
+            totalValue += item.value;
+        } else {
+            totalValue += (capacity / item.weight) * item.value;
+            break;
+        }
+    }
+    return totalValue;
+}</code></pre>
+        </div>
+
+        <!-- Block 14: Backtracking -->
+        <div id="backtracking" class="section">
+            <h2>Backtracking</h2>
+            <p>Backtracking is a technique to solve problems by trying out possible solutions and abandoning them if they don't work.</p>
+            <p><strong>Applications:</strong></p>
+            <ul>
+                <li><strong>N-Queens Problem:</strong> Place N queens on a chessboard without attacking each other.</li>
+                <li><strong>Sudoku Solver:</strong> Fill a Sudoku grid using backtracking.</li>
+            </ul>
+            <pre><code>// Example: N-Queens Problem
+function solveNQueens(n) {
+    const board = Array.from({ length: n }, () => Array(n).fill('.'));
+    const result = [];
+    function backtrack(row) {
+        if (row === n) {
+            result.push(board.map(row => row.join('')));
+            return;
+        }
+        for (let col = 0; col < n; col++) {
+            if (isSafe(row, col)) {
+                board[row][col] = 'Q';
+                backtrack(row + 1);
+                board[row][col] = '.';
+            }
+        }
+    }
+    backtrack(0);
+    return result;
+}</code></pre>
+       </div>
+       </div>
+       <script>
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

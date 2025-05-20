@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python for Data Analysis Knowledge Base</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Navbar Styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 6%;
+            background: #252a57;
+            box-shadow: 0 4px 8px rgba(75, 73, 73, 0.5);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav img {
+            width: 150px;
+        }
+
+        .nav-links {
+            flex: 1;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .nav-links ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links ul li:hover a {
+            color: #4d5b9b;
+        }
+        .nav-links ul li::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #5e64a1;
+    display: block;
+    margin: auto;
+    transition: width 0.3s;
+}
+
+.nav-links ul li:hover::after {
+    width: 100%;
+}
+
+        /* Sidebar Toggle Button */
+        #sidebar-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #34427ead;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+
+        /* Header Styles */
+        #header {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 60px;
+        }
+
+         /* Sidebar Styles */
+         #sidebar {
+            width: 250px;
+            background: #ffffff;
+            padding: 15px;
+            height: 1000vh;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            border-right: 2px solid #0077b6;
+            overflow-y: visible;
+            transition: left 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar.open {
+            left: 0;
+        }
+
+        #sidebar h3 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0077b6;
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: #303870;
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8;
+        }
+
+        /* Adjust Content when Sidebar Opens */
+        #content {
+            margin-left: 20px;
+            padding: 20px;
+            margin-top: 10px;
+            transition: margin-left 0.3s ease;
+            overflow-y: scroll;
+        }
+
+        #sidebar.open ~ #content {
+            margin-left: 270px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #303870 /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2,h1,h3,h4,h5,h6 {
+            color: #303870; /* Blue headings */
+        }
+        .auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    background-color: #303870;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+    background-color: #1b1f3d;
+}
+        /* Footer Styles */
+        #footer {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+            position: -webkit-sticky;
+        }
+        .footer-a:hover{
+            color: #19cfc6;
+        }
+        /* Main Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    color: #fff;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Nested Dropdown */
+  .nested-dropdown {
+    position: relative;
+  }
+  
+  .nested-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 100%; /* Position the nested dropdown to the right of the parent */
+    top: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .nested-dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .nested-dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .nested-dropdown:hover .nested-dropdown-content {
+    display: block;
+  }
+    </style>
+</head>
+<body>
+    <nav>
+        <button id="sidebar-toggle">☰</button>
+        <img src="/techastraa/logo4.png" alt="Logo">
+        <div class="nav-links">
+            <ul>
+               <li><a href="/post_login.php">HOME</a></li>
+               <li><a href="/privacy.html" target="_blank">POLICY</a></li>
+               <li class="dropdown">
+                 <a href="#" class="dropbtn">COURSES</a> <!-- Main Dropdown -->
+                 <div class="dropdown-content">
+                   <!-- Microsoft Office -->
+                   <div class="nested-dropdown">
+                     <a href="#">Microsoft Office</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="#" target="_blank" >Word</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">Excel</a>
+                       <a href="#" target="_blank">Advanced Excel</a>
+                       <a href="#" target="_blank" >PowerPoint</a>
+                     </div>
+                   </div>
+               
+                   <!-- Web Development -->
+                   <div class="nested-dropdown">
+                     <a href="#">Web Development</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="/techastraa/webdev/ht.html" target="_blank" >HTML</a>
+                       <a href="/techastraa/webdev/css.html" target="_blank" >CSS</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">JavaScript</a>
+                       <a href="/techastraa/webdev/bootstrap/bootstrap.html" target="_blank" >Bootstrap</a>
+                     </div>
+                   </div>
+               
+                   <!-- App Development -->
+   <div class="nested-dropdown">
+     <a href="#">App Development</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/appdevelopment/kotlin.html" target="_blank">Kotlin</a>
+       <a href="#" target="_blank">Java</a>
+       <a href="/techastraa/appdevelopment/swift.html" target="_blank">Swift</a>
+     </div>
+   </div>
+
+   <!-- Data Analysis -->
+   <div class="nested-dropdown">
+     <a href="#">Data Analysis</a>
+     <div class="nested-dropdown-content">
+       <a href="python.html" >Python</a>
+       <a href="/techastraa/dataanalysis/r.htm" target="_blank">R</a>
+     </div>
+   </div>
+
+   <!-- Backend Languages -->
+   <div class="nested-dropdown">
+     <a href="#">Backend Languages</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/backend/python.htm" target="_blank">Python</a>
+       <a href="/techastraa/backend/java.htm" target="_blank">Java</a>
+       <a href="/techastraa/backend/C++.htm" target="_blank">C++</a>
+       <a href="/techastraa/backend/javascript.htm" target="_blank">JavaScript</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PHP</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Ruby</a>
+       <a href="/techastraa/clarisse.html" target="_blank">C#/.NET</a>
+     </div>
+   </div>
+
+   <!-- DSA -->
+   <a href="/techastraa/DSA.htm" target="_blank">DSA</a>
+
+   <!-- DBMS -->
+   <div class="nested-dropdown">
+     <a href="#">DBMS</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/clarisse.html" target="_blank" >SQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">MySQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PostgreSQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Oracle</a>
+                 </div>
+               </li>
+               <li><a href="mailto:teamtechashtra@hmail.com" >CONTACT US</a></li>
+            </ul>
+          </div>
+        <div class="auth-buttons">
+            <a href="/techastraa/logout.php"><button class="login">LOGOUT</button></a>
+            <a href="register.html"><button class="register">Register</button></a>
+           </div>
+    </nav>
+    
+    <div id="header">Python for Data Analysis</div>
+    
+    <div id="sidebar">
+        <br><br>
+        <h3>Menu</h3>
+        <a href="python.html" target="_blank">Introduction</a></li>
+        <a href="installation.html" target="_blank">Installation</a></li>
+        <a href="pandas.html" target="_blank">Pandas</a></li>
+        <a href="numpy.html" target="_blank" >NumPy</a></li>
+        <a href="matplotlib.html" target="_blank">Matplotlib</a></li>
+        <a href="seaborn.html" target="_blank">Seaborn</a></li>
+        <a href="scikitlearn.html">Scikit-learn</a></li>
+        <a href="projects.html" target="_blank">Data Analysis Projects</a></li>
+        <a href="resources.html" target="_blank">Resources</a></li>
+</div>
+   
+            <div id="content">
+<section id="scikit" class="section">
+    <h2>Scikit-learn: Machine Learning in Python</h2>
+
+    <h3>Introduction to Scikit-learn</h3>
+    <p>
+        Scikit-learn is a powerful open-source library for machine learning in Python. It provides tools for building predictive models, performing data preprocessing, and evaluating model performance. Scikit-learn is built on top of NumPy, SciPy, and Matplotlib, making it highly efficient and compatible with other scientific computing libraries.
+    </p>
+    <p>
+        Key Features:
+    </p>
+    <ul>
+        <li><strong>Data Preprocessing:</strong> Tools for handling missing values, scaling features, and encoding categorical variables.</li>
+        <li><strong>Supervised Learning:</strong> Algorithms for classification and regression tasks.</li>
+        <li><strong>Unsupervised Learning:</strong> Techniques like clustering and dimensionality reduction.</li>
+        <li><strong>Model Evaluation:</strong> Metrics and techniques to evaluate and validate models.</li>
+    </ul>
+
+    <h3>Installation of Scikit-learn</h3>
+    <p>
+        Install Scikit-learn using pip:
+    </p>
+    <pre><code class="bash">
+pip install scikit-learn
+    </code></pre>
+    <p>
+        Verify the installation by running:
+    </p>
+    <pre><code class="python">
+import sklearn
+print(sklearn.__version__)
+    </code></pre>
+
+    <h3>Data Preprocessing</h3>
+    <p>
+        Data preprocessing is a crucial step in machine learning. Scikit-learn provides tools to handle missing values, scale features, and encode categorical variables.
+    </p>
+    <h4>Handling Missing Values</h4>
+    <pre><code class="python">
+from sklearn.impute import SimpleImputer
+import numpy as np
+
+data = [[1, 2], [np.nan, 3], [7, 6]]
+imputer = SimpleImputer(strategy='mean')  # Replace missing values with the mean
+imputed_data = imputer.fit_transform(data)
+print(imputed_data)
+    </code></pre>
+
+    <h4>Scaling Features</h4>
+    <pre><code class="python">
+from sklearn.preprocessing import StandardScaler
+
+data = [[0, 0], [0, 0], [1, 1], [1, 1]]
+scaler = StandardScaler()
+scaled_data = scaler.fit_transform(data)
+print(scaled_data)
+    </code></pre>
+
+    <h4>Encoding Categorical Variables</h4>
+    <pre><code class="python">
+from sklearn.preprocessing import OneHotEncoder
+
+data = [['red'], ['blue'], ['green']]
+encoder = OneHotEncoder()
+encoded_data = encoder.fit_transform(data).toarray()
+print(encoded_data)
+    </code></pre>
+
+    <h3>Supervised Learning</h3>
+    <p>
+        Supervised learning involves training models on labeled data to make predictions.
+    </p>
+    <h4>Linear Regression</h4>
+    <pre><code class="python">
+from sklearn.linear_model import LinearRegression
+
+# Sample data
+X = [[1], [2], [3], [4]]  # Features
+y = [2, 4, 6, 8]  # Labels
+
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict
+print(model.predict(<button class="citation-flag" data-index="5">))  # Output: [10]
+    </code></pre>
+
+    <h4>Logistic Regression</h4>
+    <pre><code class="python">
+from sklearn.linear_model import LogisticRegression
+
+# Sample data
+X = [[1], [2], [3], [4]]
+y = [0, 0, 1, 1]
+
+model = LogisticRegression()
+model.fit(X, y)
+
+# Predict
+print(model.predict(<button class="citation-flag" data-index="5">))  # Output: [1]
+    </code></pre>
+
+    <h3>Unsupervised Learning</h3>
+    <p>
+        Unsupervised learning involves finding patterns in unlabeled data.
+    </p>
+    <h4>K-Means Clustering</h4>
+    <pre><code class="python">
+from sklearn.cluster import KMeans
+
+# Sample data
+data = [[1, 2], [1, 4], [1, 0], [4, 2], [4, 4], [4, 0]]
+
+kmeans = KMeans(n_clusters=2)
+kmeans.fit(data)
+
+# Cluster labels
+print(kmeans.labels_)
+    </code></pre>
+
+    <h4>Principal Component Analysis (PCA)</h4>
+    <pre><code class="python">
+from sklearn.decomposition import PCA
+
+# Sample data
+data = [[1, 2], [2, 3], [3, 4], [4, 5]]
+
+pca = PCA(n_components=1)
+transformed_data = pca.fit_transform(data)
+print(transformed_data)
+    </code></pre>
+
+    <h3>Model Evaluation</h3>
+    <p>
+        Evaluating model performance is essential to ensure its reliability.
+    </p>
+    <h4>Train-Test Split</h4>
+    <pre><code class="python">
+from sklearn.model_selection import train_test_split
+
+# Sample data
+X = [[1], [2], [3], [4], [5]]
+y = [2, 4, 6, 8, 10]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print("Training Data:", X_train, y_train)
+print("Testing Data:", X_test, y_test)
+    </code></pre>
+
+    <h4>Cross-Validation</h4>
+    <pre><code class="python">
+from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LinearRegression
+
+# Sample data
+X = [[1], [2], [3], [4], [5]]
+y = [2, 4, 6, 8, 10]
+
+model = LinearRegression()
+scores = cross_val_score(model, X, y, cv=3)
+print("Cross-Validation Scores:", scores)
+    </code></pre>
+
+    <h4>Confusion Matrix</h4>
+    <pre><code class="python">
+from sklearn.metrics import confusion_matrix
+from sklearn.linear_model import LogisticRegression
+
+# Sample data
+X = [[1], [2], [3], [4]]
+y = [0, 0, 1, 1]
+
+model = LogisticRegression()
+model.fit(X, y)
+y_pred = model.predict(X)
+
+matrix = confusion_matrix(y, y_pred)
+print(matrix)
+    </code></pre>
+
+    <h3>Tips for Beginners</h3>
+    <ul>
+        <li><strong>Start Simple:</strong> Begin with basic algorithms like linear regression and logistic regression before moving to advanced models.</li>
+        <li><strong>Use Documentation:</strong> Refer to the official Scikit-learn documentation: <a href="https://scikit-learn.org/stable/" target="_blank">Scikit-learn Documentation</a>.</li>
+        <li><strong>Explore Examples:</strong> Look at example galleries to get inspiration for your own projects.</li>
+        <li><strong>Combine with Pandas:</strong> Use Scikit-learn in conjunction with Pandas for seamless data manipulation and modeling.</li>
+    </ul>
+</section>
+</div>
+<div id="footer">&copy; 2025 Tech Astra | <a href="/terms.html" id="footer" target="_blank">Terms</a> |<a href="/privacy.html" id="footer" target="_blank"> Privacy Policy</a></div>
+
+    <script>
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            let sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

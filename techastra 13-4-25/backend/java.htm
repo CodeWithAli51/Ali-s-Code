@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">Java Tutorial</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>Java Tutorial</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#variables">Variables & Data Types</a>
+        <a href="#operators">Operators</a>
+        <a href="#control">Control Flow</a>
+        <a href="#oop">OOP Concepts</a>
+        <a href="#exceptions">Exception Handling</a>
+        <a href="#collections">Collections</a>
+        <a href="#multithreading">Multithreading</a>
+        <a href="#streams">Streams API</a>
+        <a href="#jdbc">JDBC</a>
+        <a href="#servlets">Servlets</a>
+        <a href="#spring">Spring Framework</a>
+        <a href="#hibernate">Hibernate</a>
+        <a href="#rest">REST APIs</a>
+        <a href="#microservices">Microservices</a>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- Block 1: Introduction -->
+        <div id="intro" class="section">
+            <h2>Introduction to Java</h2>
+            <p>Java is a high-level, class-based, object-oriented programming language designed for portability and performance. It is widely used for backend development, mobile apps (Android), and enterprise applications.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Platform Independence:</strong> Java code is compiled into bytecode, which can run on any device with a Java Virtual Machine (JVM).</li>
+                <li><strong>Object-Oriented:</strong> Java follows the principles of encapsulation, inheritance, polymorphism, and abstraction.</li>
+                <li><strong>Robust and Secure:</strong> Java has strong memory management, exception handling, and security features.</li>
+                <li><strong>Rich Standard Library:</strong> Java provides a vast standard library (Java Standard Edition) for data structures, networking, and more.</li>
+            </ul>
+            <pre><code>public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</code></pre>
+        </div>
+
+        <!-- Block 2: Variables & Data Types -->
+        <div id="variables" class="section">
+            <h2>Variables & Data Types</h2>
+            <p>Variables are used to store data in Java. Each variable has a specific data type that defines the kind of data it can hold.</p>
+            <p><strong>Primitive Data Types:</strong></p>
+            <ul>
+                <li><code>byte</code>: 8-bit integer (-128 to 127).</li>
+                <li><code>short</code>: 16-bit integer (-32,768 to 32,767).</li>
+                <li><code>int</code>: 32-bit integer (-2^31 to 2^31-1).</li>
+                <li><code>long</code>: 64-bit integer (-2^63 to 2^63-1).</li>
+                <li><code>float</code>: 32-bit floating-point number.</li>
+                <li><code>double</code>: 64-bit floating-point number.</li>
+                <li><code>char</code>: 16-bit Unicode character.</li>
+                <li><code>boolean</code>: Represents <code>true</code> or <code>false</code>.</li>
+            </ul>
+            <p><strong>Non-Primitive Data Types:</strong></p>
+            <ul>
+                <li><code>String</code>: A sequence of characters.</li>
+                <li>Arrays: A collection of elements of the same type.</li>
+                <li>Classes and Objects: User-defined data types.</li>
+            </ul>
+            <pre><code>int age = 25;
+double price = 99.99;
+String name = "John";</code></pre>
+        </div>
+
+        <!-- Block 3: Operators -->
+        <div id="operators" class="section">
+            <h2>Operators</h2>
+            <p>Java provides various types of operators for performing operations on variables and values.</p>
+            <p><strong>Types of Operators:</strong></p>
+            <ul>
+                <li><strong>Arithmetic Operators:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>.</li>
+                <li><strong>Comparison Operators:</strong> <code>==</code>, <code>!=</code>, <code>></code>, <code><</code>, <code>>=</code>, <code><=</code>.</li>
+                <li><strong>Logical Operators:</strong> <code>&&</code>, <code>||</code>, <code>!</code>.</li>
+                <li><strong>Assignment Operators:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>.</li>
+            </ul>
+            <pre><code>int a = 10, b = 5;
+int sum = a + b; // Arithmetic
+boolean isEqual = (a == b); // Comparison
+boolean result = (a > 5 && b < 10); // Logical
+a += 5; // Assignment</code></pre>
+        </div>
+
+        <!-- Block 4: Control Flow -->
+        <div id="control" class="section">
+            <h2>Control Flow</h2>
+            <p>Control flow statements allow you to control the execution of your program based on conditions or loops.</p>
+            <p><strong>Types of Control Flow Statements:</strong></p>
+            <ul>
+                <li><strong>If-Else:</strong> Executes a block of code if a condition is true.</li>
+                <li><strong>Switch:</strong> Executes one of many code blocks based on the value of a variable.</li>
+                <li><strong>Loops:</strong> Repeats a block of code while a condition is true (e.g., <code>for</code>, <code>while</code>, <code>do-while</code>).</li>
+            </ul>
+            <pre><code>int age = 18;
+if (age >= 18) {
+    System.out.println("You are an adult.");
+} else {
+    System.out.println("You are a minor.");
+}</code></pre>
+        </div>
+
+        <!-- Block 5: OOP Concepts -->
+        <div id="oop" class="section">
+            <h2>OOP Concepts</h2>
+            <p>Java is an object-oriented programming language. The four main principles of OOP are:</p>
+            <ul>
+                <li><strong>Encapsulation:</strong> Bundling data and methods that operate on the data within a single unit (class).</li>
+                <li><strong>Inheritance:</strong> Creating new classes from existing ones to reuse code.</li>
+                <li><strong>Polymorphism:</strong> Allowing objects to take on multiple forms (e.g., method overriding).</li>
+                <li><strong>Abstraction:</strong> Hiding complex implementation details and showing only the necessary features.</li>
+            </ul>
+            <pre><code>class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}</code></pre>
+        </div>
+
+        <!-- Block 6: Exception Handling -->
+        <div id="exceptions" class="section">
+            <h2>Exception Handling</h2>
+            <p>Exception handling in Java is used to handle runtime errors and maintain the normal flow of the program.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Try-Catch Block:</strong> Catches and handles exceptions.</li>
+                <li><strong>Finally Block:</strong> Executes code regardless of whether an exception occurs.</li>
+                <li><strong>Throws Keyword:</strong> Declares exceptions that a method might throw.</li>
+            </ul>
+            <pre><code>try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero!");
+} finally {
+    System.out.println("Execution complete.");
+}</code></pre>
+        </div>
+
+        <!-- Block 7: Collections -->
+        <div id="collections" class="section">
+            <h2>Collections</h2>
+            <p>The Java Collections Framework provides classes like <code>ArrayList</code>, <code>HashMap</code>, and <code>HashSet</code> for data storage.</p>
+            <p><strong>Key Interfaces:</strong></p>
+            <ul>
+                <li><code>List</code>: Ordered collection (e.g., <code>ArrayList</code>).</li>
+                <li><code>Set</code>: Unordered collection with no duplicates (e.g., <code>HashSet</code>).</li>
+                <li><code>Map</code>: Key-value pairs (e.g., <code>HashMap</code>).</li>
+            </ul>
+            <pre><code>List<String> list = new ArrayList<>();
+list.add("Java");
+list.add("Python");</code></pre>
+        </div>
+
+        <!-- Block 8: Multithreading -->
+        <div id="multithreading" class="section">
+            <h2>Multithreading</h2>
+            <p>Java supports multithreading for concurrent execution.</p>
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Thread:</strong> A lightweight process that runs concurrently with other threads.</li>
+                <li><strong>Synchronization:</strong> Ensures that only one thread can access a resource at a time.</li>
+                <li><strong>Thread Pool:</strong> A group of threads that are reused for executing tasks.</li>
+            </ul>
+            <pre><code>class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}</code></pre>
+        </div>
+
+        <!-- Block 9: Streams API -->
+        <div id="streams" class="section">
+            <h2>Streams API</h2>
+            <p>The Streams API allows functional-style operations on collections.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Filter:</strong> Selects elements based on a condition.</li>
+                <li><strong>Map:</strong> Transforms elements.</li>
+                <li><strong>Reduce:</strong> Combines elements into a single result.</li>
+            </ul>
+            <pre><code>List<String> names = Arrays.asList("John", "Jane", "Doe");
+names.stream().filter(name -> name.startsWith("J")).forEach(System.out::println);</code></pre>
+        </div>
+
+        <!-- Block 10: JDBC -->
+        <div id="jdbc" class="section">
+            <h2>JDBC</h2>
+            <p>Java Database Connectivity (JDBC) is used to connect Java applications to databases.</p>
+            <p><strong>Steps to Use JDBC:</strong></p>
+            <ol>
+                <li>Load the JDBC driver.</li>
+                <li>Establish a connection to the database.</li>
+                <li>Create a statement.</li>
+                <li>Execute queries.</li>
+                <li>Process the results.</li>
+                <li>Close the connection.</li>
+            </ol>
+            <pre><code>Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "user", "password");</code></pre>
+        </div>
+
+        <!-- Block 11: Servlets -->
+        <div id="servlets" class="section">
+            <h2>Servlets</h2>
+            <p>Servlets are Java programs that run on a web server and handle HTTP requests.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Lifecycle:</strong> <code>init()</code>, <code>service()</code>, <code>destroy()</code>.</li>
+                <li><strong>Request Handling:</strong> <code>doGet()</code>, <code>doPost()</code>.</li>
+            </ul>
+            <pre><code>public class MyServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().write("Hello, Servlet!");
+    }
+}</code></pre>
+        </div>
+
+        <!-- Block 12: Spring Framework -->
+        <div id="spring" class="section">
+            <h2>Spring Framework</h2>
+            <p>Spring is a powerful framework for building enterprise Java applications.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Dependency Injection:</strong> Promotes loose coupling.</li>
+                <li><strong>Spring MVC:</strong> For building web applications.</li>
+                <li><strong>Spring Boot:</strong> Simplifies Spring application development.</li>
+            </ul>
+            <pre><code>@RestController
+public class MyController {
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello, Spring!";
+    }
+}</code></pre>
+        </div>
+
+        <!-- Block 13: Hibernate -->
+        <div id="hibernate" class="section">
+            <h2>Hibernate</h2>
+            <p>Hibernate is an ORM framework for mapping Java objects to database tables.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Object-Relational Mapping:</strong> Maps Java classes to database tables.</li>
+                <li><strong>HQL:</strong> Hibernate Query Language for database queries.</li>
+            </ul>
+            <pre><code>@Entity
+public class User {
+    @Id
+    private int id;
+    private String name;
+}</code></pre>
+        </div>
+
+        <!-- Block 14: REST APIs -->
+        <div id="rest" class="section">
+            <h2>REST APIs</h2>
+            <p>REST APIs are used to build web services in Java.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>HTTP Methods:</strong> <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>.</li>
+                <li><strong>Stateless:</strong> Each request is independent.</li>
+            </ul>
+            <pre><code>@RestController
+public class MyController {
+    @GetMapping("/api/users")
+    public List<User> getUsers() {
+        return userService.getAllUsers();
+    }
+}</code></pre>
+</div>
+        <!-- Block 15: Microservices -->
+        <div id="microservices" class="section">
+            <h2>Microservices</h2>
+            <p>Microservices architecture involves building small, independent services.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li><strong>Decentralized:</strong> Each service is independent.</li>
+                <li><strong>Scalable:</strong> Services can be scaled independently.</li>
+            </ul>
+            <pre><code>@SpringBootApplication
+public class MyMicroservice {
+    public static void main(String[] args) {
+        SpringApplication.run(MyMicroservice.class, args);
+    }
+}</code></pre>
+        </div>
+    </div>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Tutorial</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #0077b6; /* Dark blue header */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #ffffff; /* White sidebar */
+            padding: 15px;
+            height: calc(100vh - 60px); /* Full height minus header */
+            position: fixed;
+            border-right: 2px solid #0077b6; /* Blue border */
+            overflow-y: auto; /* Make sidebar scrollable */
+            margin-top: 60px; /* Space for header */
+        }
+
+        #sidebar h3 {
+            color: #0077b6; /* Blue headings */
+            margin-bottom: 10px;
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #0077b6; /* Blue text */
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8; /* Light blue hover */
+            transform: translateX(10px);
+        }
+
+        #sidebar .subtopic {
+            padding-left: 20px; /* Indent subtopics */
+            display: none; /* Hide subtopics by default */
+        }
+
+        #sidebar .subtopic a {
+            font-size: 14px; /* Smaller font for subtopics */
+        }
+
+        /* Content Styles */
+        #content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            margin-top: 60px; /* Space for header */
+            overflow-y: auto; /* Make content scrollable */
+            height: calc(100vh - 60px); /* Full height minus header */
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #0077b6; /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2 {
+            color: #0077b6; /* Blue headings */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">Tech Tutorial</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>Topics</h3>
+
+        <!-- PHP -->
+        <a href="#" class="main-topic">PHP</a>
+        <div class="subtopic">
+            <a href="#php-intro">Introduction to PHP</a>
+            <a href="#php-syntax">PHP Syntax</a>
+            <a href="#php-variables">Variables and Data Types</a>
+            <a href="#php-loops">Loops</a>
+            <a href="#php-functions">Functions</a>
+            <a href="#php-arrays">Arrays</a>
+            <a href="#php-forms">Working with Forms</a>
+            <a href="#php-file-handling">File Handling</a>
+            <a href="#php-db">Database Connectivity</a>
+            <a href="#php-error-handling">Error Handling</a>
+        </div>
+
+        <!-- Ruby -->
+        <a href="#" class="main-topic">Ruby</a>
+        <div class="subtopic">
+            <a href="#ruby-intro">Introduction to Ruby</a>
+            <a href="#ruby-syntax">Ruby Syntax</a>
+            <a href="#ruby-variables">Variables and Data Types</a>
+            <a href="#ruby-loops">Loops</a>
+            <a href="#ruby-methods">Methods</a>
+            <a href="#ruby-classes">Classes and Objects</a>
+            <a href="#ruby-modules">Modules</a>
+            <a href="#ruby-exceptions">Exception Handling</a>
+        </div>
+
+        <!-- SQL -->
+        <a href="#" class="main-topic">SQL</a>
+        <div class="subtopic">
+            <a href="#sql-intro">Introduction to SQL</a>
+            <a href="#sql-syntax">SQL Syntax</a>
+            <a href="#sql-select">SELECT Queries</a>
+            <a href="#sql-insert">INSERT, UPDATE, DELETE</a>
+            <a href="#sql-joins">Joins</a>
+            <a href="#sql-functions">Aggregation Functions</a>
+            <a href="#sql-subqueries">Subqueries</a>
+            <a href="#sql-indexes">Indexes and Optimization</a>
+        </div>
+
+        <!-- MySQL -->
+        <a href="#" class="main-topic">MySQL</a>
+        <div class="subtopic">
+            <a href="#mysql-intro">Introduction to MySQL</a>
+            <a href="#mysql-installation">Installation</a>
+            <a href="#mysql-create-db">Creating Databases</a>
+            <a href="#mysql-create-table">Creating Tables</a>
+            <a href="#mysql-crud">CRUD Operations</a>
+            <a href="#mysql-joins">Joins</a>
+            <a href="#mysql-transactions">Transactions</a>
+            <a href="#mysql-backup">Backup and Restore</a>
+        </div>
+
+        <!-- Oracle -->
+        <a href="#" class="main-topic">Oracle</a>
+        <div class="subtopic">
+            <a href="#oracle-intro">Introduction to Oracle</a>
+            <a href="#oracle-installation">Installation</a>
+            <a href="#oracle-create-db">Creating Databases</a>
+            <a href="#oracle-create-table">Creating Tables</a>
+            <a href="#oracle-plsql">PL/SQL Basics</a>
+            <a href="#oracle-joins">Joins</a>
+            <a href="#oracle-transactions">Transactions</a>
+            <a href="#oracle-backup">Backup and Restore</a>
+        </div>
+
+        <!-- Cisco Packet Tracer -->
+        <a href="#" class="main-topic">Cisco Packet Tracer</a>
+        <div class="subtopic">
+            <a href="#cisco-intro">Introduction to Cisco Packet Tracer</a>
+            <a href="#cisco-installation">Installation</a>
+            <a href="#cisco-basic-config">Basic Configuration</a>
+            <a href="#cisco-routing">Routing</a>
+            <a href="#cisco-switching">Switching</a>
+            <a href="#cisco-troubleshooting">Troubleshooting</a>
+        </div>
+
+        <!-- C# -->
+        <a href="#" class="main-topic">C#</a>
+        <div class="subtopic">
+            <a href="#csharp-intro">Introduction to C#</a>
+            <a href="#csharp-syntax">C# Syntax</a>
+            <a href="#csharp-variables">Variables and Data Types</a>
+            <a href="#csharp-loops">Loops</a>
+            <a href="#csharp-functions">Functions</a>
+            <a href="#csharp-oop">OOP Concepts</a>
+            <a href="#csharp-exceptions">Exception Handling</a>
+            <a href="#csharp-file-handling">File Handling</a>
+        </div>
+
+        <!-- PostgreSQL -->
+        <a href="#" class="main-topic">PostgreSQL</a>
+        <div class="subtopic">
+            <a href="#postgres-intro">Introduction to PostgreSQL</a>
+            <a href="#postgres-installation">Installation</a>
+            <a href="#postgres-create-db">Creating Databases</a>
+            <a href="#postgres-create-table">Creating Tables</a>
+            <a href="#postgres-crud">CRUD Operations</a>
+            <a href="#postgres-joins">Joins</a>
+            <a href="#postgres-transactions">Transactions</a>
+            <a href="#postgres-backup">Backup and Restore</a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- PHP Content -->
+        <div id="php-intro" class="section">
+            <h2>Introduction to PHP</h2>
+            <p>PHP is a server-side scripting language used for web development. It is embedded in HTML and is widely used to create dynamic web pages.</p>
+            <pre><code>&lt;?php
+echo "Hello, World!";
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-syntax" class="section">
+            <h2>PHP Syntax</h2>
+            <p>PHP scripts start with <code>&lt;?php</code> and end with <code>?&gt;</code>. PHP statements must end with a semicolon (<code>;</code>).</p>
+            <pre><code>&lt;?php
+echo "This is PHP syntax!";
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-variables" class="section">
+            <h2>Variables and Data Types</h2>
+            <p>Variables in PHP start with a dollar sign (<code>$</code>). PHP supports various data types like strings, integers, floats, booleans, arrays, and objects.</p>
+            <pre><code>&lt;?php
+$name = "John";
+$age = 25;
+$isStudent = true;
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-loops" class="section">
+            <h2>Loops</h2>
+            <p>PHP supports loops like <code>for</code>, <code>while</code>, and <code>foreach</code>.</p>
+            <pre><code>&lt;?php
+for ($i = 0; $i < 5; $i++) {
+    echo "Number: $i&lt;br&gt;";
+}
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-functions" class="section">
+            <h2>Functions</h2>
+            <p>Functions in PHP are defined using the <code>function</code> keyword.</p>
+            <pre><code>&lt;?php
+function greet($name) {
+    return "Hello, $name!";
+}
+echo greet("Alice");
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-arrays" class="section">
+            <h2>Arrays</h2>
+            <p>Arrays in PHP can store multiple values in a single variable.</p>
+            <pre><code>&lt;?php
+$colors = array("Red", "Green", "Blue");
+echo $colors[0]; // Output: Red
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-forms" class="section">
+            <h2>Working with Forms</h2>
+            <p>PHP can handle form data using the <code>$_POST</code> or <code>$_GET</code> superglobals.</p>
+            <pre><code>&lt;?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    echo "Hello, $name!";
+}
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-file-handling" class="section">
+            <h2>File Handling</h2>
+            <p>PHP can read and write files using functions like <code>fopen</code>, <code>fread</code>, and <code>fwrite</code>.</p>
+            <pre><code>&lt;?php
+$file = fopen("example.txt", "w");
+fwrite($file, "Hello, World!");
+fclose($file);
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-db" class="section">
+            <h2>Database Connectivity</h2>
+            <p>PHP can connect to databases like MySQL using the <code>mysqli</code> extension.</p>
+            <pre><code>&lt;?php
+$conn = new mysqli("localhost", "root", "", "mydb");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully";
+?&gt;</code></pre>
+        </div>
+
+        <div id="php-error-handling" class="section">
+            <h2>Error Handling</h2>
+            <p>PHP provides functions like <code>try</code>, <code>catch</code>, and <code>throw</code> for error handling.</p>
+            <pre><code>&lt;?php
+try {
+    // Code that may throw an exception
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+?&gt;</code></pre>
+        </div>
+
+        <!-- Ruby Content -->
+        <div id="ruby-intro" class="section">
+            <h2>Introduction to Ruby</h2>
+            <p>Ruby is a dynamic, object-oriented programming language known for its simplicity and productivity.</p>
+            <pre><code>puts "Hello, World!"</code></pre>
+        </div>
+
+        <div id="ruby-syntax" class="section">
+            <h2>Ruby Syntax</h2>
+            <p>Ruby code is easy to read and write. It uses keywords like <code>def</code> for defining methods and <code>end</code> to close blocks.</p>
+            <pre><code>def greet(name)
+    puts "Hello, #{name}!"
+end
+greet("Alice")</code></pre>
+        </div>
+
+        <div id="ruby-variables" class="section">
+            <h2>Variables and Data Types</h2>
+            <p>Ruby supports variables and data types like strings, integers, floats, and booleans.</p>
+            <pre><code>name = "John"
+age = 25
+is_student = true</code></pre>
+        </div>
+
+        <div id="ruby-loops" class="section">
+            <h2>Loops</h2>
+            <p>Ruby supports loops like <code>for</code>, <code>while</code>, and <code>each</code>.</p>
+            <pre><code>for i in 0..4
+    puts "Number: #{i}"
+end</code></pre>
+        </div>
+
+        <div id="ruby-methods" class="section">
+            <h2>Methods</h2>
+            <p>Methods in Ruby are defined using the <code>def</code> keyword.</p>
+            <pre><code>def add(a, b)
+    return a + b
+end
+puts add(2, 3) # Output: 5</code></pre>
+        </div>
+
+        <div id="ruby-classes" class="section">
+            <h2>Classes and Objects</h2>
+            <p>Ruby is an object-oriented language. Classes are defined using the <code>class</code> keyword.</p>
+            <pre><code>class Person
+    def initialize(name)
+        @name = name
+    end
+    def greet
+        puts "Hello, #{@name}!"
+    end
+end
+person = Person.new("Alice")
+person.greet</code></pre>
+        </div>
+
+        <div id="ruby-modules" class="section">
+            <h2>Modules</h2>
+            <p>Modules in Ruby are used to group methods, classes, and constants.</p>
+            <pre><code>module Greet
+    def say_hello
+        puts "Hello!"
+    end
+end
+class Person
+    include Greet
+end
+person = Person.new
+person.say_hello</code></pre>
+        </div>
+
+        <div id="ruby-exceptions" class="section">
+            <h2>Exception Handling</h2>
+            <p>Ruby uses <code>begin</code>, <code>rescue</code>, and <code>ensure</code> for exception handling.</p>
+            <pre><code>begin
+    # Code that may raise an exception
+rescue => e
+    puts "Error: #{e.message}"
+end</code></pre>
+        </div>
+
+        <!-- SQL Content -->
+        <div id="sql-intro" class="section">
+            <h2>Introduction to SQL</h2>
+            <p>SQL (Structured Query Language) is used to manage and manipulate relational databases.</p>
+            <pre><code>SELECT * FROM users;</code></pre>
+        </div>
+
+        <div id="sql-syntax" class="section">
+            <h2>SQL Syntax</h2>
+            <p>SQL statements are used to perform tasks like querying data, updating data, and managing databases.</p>
+            <pre><code>SELECT column1, column2 FROM table_name WHERE condition;</code></pre>
+        </div>
+
+        <div id="sql-select" class="section">
+            <h2>SELECT Queries</h2>
+            <p>The <code>SELECT</code> statement is used to retrieve data from a database.</p>
+            <pre><code>SELECT name, email FROM users WHERE age > 18;</code></pre>
+        </div>
+
+        <div id="sql-insert" class="section">
+            <h2>INSERT, UPDATE, DELETE</h2>
+            <p>SQL supports commands like <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> to modify data.</p>
+            <pre><code>INSERT INTO users (name, email) VALUES ('John', 'john@example.com');
+UPDATE users SET email = 'john.doe@example.com' WHERE id = 1;
+DELETE FROM users WHERE id = 1;</code></pre>
+        </div>
+
+        <div id="sql-joins" class="section">
+            <h2>Joins</h2>
+            <p>SQL joins are used to combine rows from two or more tables.</p>
+            <pre><code>SELECT users.name, orders.amount
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;</code></pre>
+        </div>
+
+        <div id="sql-functions" class="section">
+            <h2>Aggregation Functions</h2>
+            <p>SQL provides functions like <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, and <code>MAX</code>.</p>
+            <pre><code>SELECT COUNT(*) FROM users;
+SELECT AVG(age) FROM users;</code></pre>
+        </div>
+
+        <div id="sql-subqueries" class="section">
+            <h2>Subqueries</h2>
+            <p>Subqueries are queries nested inside another query.</p>
+            <pre><code>SELECT name FROM users WHERE age > (SELECT AVG(age) FROM users);</code></pre>
+        </div>
+
+        <div id="sql-indexes" class="section">
+            <h2>Indexes and Optimization</h2>
+            <p>Indexes are used to speed up database queries.</p>
+            <pre><code>CREATE INDEX idx_name ON users (name);</code></pre>
+        </div>
+
+        <!-- MySQL Content -->
+        <div id="mysql-intro" class="section">
+            <h2>Introduction to MySQL</h2>
+            <p>MySQL is an open-source relational database management system (RDBMS) that uses SQL.</p>
+            <pre><code>-- Example: Create a table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);</code></pre>
+        </div>
+
+        <div id="mysql-installation" class="section">
+            <h2>Installation</h2>
+            <p>MySQL can be installed on various operating systems. Follow the official documentation for installation steps.</p>
+        </div>
+
+        <div id="mysql-create-db" class="section">
+            <h2>Creating Databases</h2>
+            <p>Use the <code>CREATE DATABASE</code> statement to create a new database.</p>
+            <pre><code>CREATE DATABASE mydb;</code></pre>
+        </div>
+
+        <div id="mysql-create-table" class="section">
+            <h2>Creating Tables</h2>
+            <p>Use the <code>CREATE TABLE</code> statement to create a new table.</p>
+            <pre><code>CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);</code></pre>
+        </div>
+
+        <div id="mysql-crud" class="section">
+            <h2>CRUD Operations</h2>
+            <p>CRUD stands for Create, Read, Update, and Delete. These are the basic operations performed on a database.</p>
+            <pre><code>-- Create
+INSERT INTO users (name, email) VALUES ('John', 'john@example.com');
+
+-- Read
+SELECT * FROM users;
+
+-- Update
+UPDATE users SET email = 'john.doe@example.com' WHERE id = 1;
+
+-- Delete
+DELETE FROM users WHERE id = 1;</code></pre>
+        </div>
+
+        <div id="mysql-joins" class="section">
+            <h2>Joins</h2>
+            <p>MySQL supports various types of joins like <code>INNER JOIN</code>, <code>LEFT JOIN</code>, and <code>RIGHT JOIN</code>.</p>
+            <pre><code>SELECT users.name, orders.amount
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;</code></pre>
+        </div>
+
+        <div id="mysql-transactions" class="section">
+            <h2>Transactions</h2>
+            <p>Transactions ensure that a set of SQL operations are executed as a single unit.</p>
+            <pre><code>START TRANSACTION;
+INSERT INTO users (name, email) VALUES ('Alice', 'alice@example.com');
+INSERT INTO orders (user_id, amount) VALUES (LAST_INSERT_ID(), 100);
+COMMIT;</code></pre>
+        </div>
+
+        <div id="mysql-backup" class="section">
+            <h2>Backup and Restore</h2>
+            <p>MySQL provides tools like <code>mysqldump</code> for backup and <code>mysql</code> for restoring databases.</p>
+            <pre><code># Backup
+mysqldump -u root -p mydb > mydb_backup.sql
+
+# Restore
+mysql -u root -p mydb < mydb_backup.sql</code></pre>
+        </div>
+
+        <!-- Oracle Content -->
+        <div id="oracle-intro" class="section">
+            <h2>Introduction to Oracle</h2>
+            <p>Oracle is a powerful RDBMS used for enterprise-level applications. It supports complex queries and large datasets.</p>
+            <pre><code>-- Example: Create a table
+CREATE TABLE employees (
+    employee_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50)
+);</code></pre>
+        </div>
+
+        <div id="oracle-installation" class="section">
+            <h2>Installation</h2>
+            <p>Oracle can be installed on various operating systems. Follow the official documentation for installation steps.</p>
+        </div>
+
+        <div id="oracle-create-db" class="section">
+            <h2>Creating Databases</h2>
+            <p>Use the <code>CREATE DATABASE</code> statement to create a new database.</p>
+            <pre><code>CREATE DATABASE mydb;</code></pre>
+        </div>
+
+        <div id="oracle-create-table" class="section">
+            <h2>Creating Tables</h2>
+            <p>Use the <code>CREATE TABLE</code> statement to create a new table.</p>
+            <pre><code>CREATE TABLE employees (
+    employee_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50)
+);</code></pre>
+        </div>
+
+        <div id="oracle-plsql" class="section">
+            <h2>PL/SQL Basics</h2>
+            <p>PL/SQL is Oracle's procedural extension to SQL. It allows you to write procedural code like loops and conditions.</p>
+            <pre><code>DECLARE
+    name VARCHAR2(50);
+BEGIN
+    name := 'John';
+    DBMS_OUTPUT.PUT_LINE('Hello, ' || name);
+END;</code></pre>
+        </div>
+
+        <div id="oracle-joins" class="section">
+            <h2>Joins</h2>
+            <p>Oracle supports various types of joins like <code>INNER JOIN</code>, <code>LEFT JOIN</code>, and <code>RIGHT JOIN</code>.</p>
+            <pre><code>SELECT employees.first_name, departments.department_name
+FROM employees
+INNER JOIN departments ON employees.department_id = departments.department_id;</code></pre>
+        </div>
+
+        <div id="oracle-transactions" class="section">
+            <h2>Transactions</h2>
+            <p>Transactions ensure that a set of SQL operations are executed as a single unit.</p>
+            <pre><code>BEGIN
+    INSERT INTO employees (employee_id, first_name, last_name) VALUES (1, 'John', 'Doe');
+    INSERT INTO departments (department_id, department_name) VALUES (10, 'Sales');
+    COMMIT;
+END;</code></pre>
+        </div>
+
+        <div id="oracle-backup" class="section">
+            <h2>Backup and Restore</h2>
+            <p>Oracle provides tools like <code>RMAN</code> for backup and recovery.</p>
+            <pre><code># Backup
+RMAN> BACKUP DATABASE;
+
+# Restore
+RMAN> RESTORE DATABASE;</code></pre>
+        </div>
+
+        <!-- Cisco Packet Tracer Content -->
+        <div id="cisco-intro" class="section">
+            <h2>Introduction to Cisco Packet Tracer</h2>
+            <p>Cisco Packet Tracer is a network simulation tool used to design, configure, and troubleshoot network systems.</p>
+            <pre><code>Router&gt; enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# interface gigabitethernet 0/0
+R1(config-if)# ip address 192.168.1.1 255.255.255.0
+R1(config-if)# no shutdown</code></pre>
+        </div>
+
+        <div id="cisco-installation" class="section">
+            <h2>Installation</h2>
+            <p>Cisco Packet Tracer can be downloaded from the official Cisco Networking Academy website.</p>
+        </div>
+
+        <div id="cisco-basic-config" class="section">
+            <h2>Basic Configuration</h2>
+            <p>Basic configuration includes setting up IP addresses, hostnames, and enabling interfaces.</p>
+            <pre><code>Router&gt; enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# interface gigabitethernet 0/0
+R1(config-if)# ip address 192.168.1.1 255.255.255.0
+R1(config-if)# no shutdown</code></pre>
+        </div>
+
+        <div id="cisco-routing" class="section">
+            <h2>Routing</h2>
+            <p>Routing involves configuring routers to forward packets between networks.</p>
+            <pre><code>R1(config)# ip route 192.168.2.0 255.255.255.0 192.168.1.2</code></pre>
+        </div>
+
+        <div id="cisco-switching" class="section">
+            <h2>Switching</h2>
+            <p>Switching involves configuring switches to forward frames within a network.</p>
+            <pre><code>Switch&gt; enable
+Switch# configure terminal
+Switch(config)# vlan 10
+Switch(config-vlan)# name Sales</code></pre>
+        </div>
+
+        <div id="cisco-troubleshooting" class="section">
+            <h2>Troubleshooting</h2>
+            <p>Troubleshooting involves identifying and resolving network issues using tools like <code>ping</code> and <code>traceroute</code>.</p>
+            <pre><code>Router# ping 192.168.1.1
+Router# traceroute 192.168.2.1</code></pre>
+        </div>
+
+        <!-- C# Content -->
+        <div id="csharp-intro" class="section">
+            <h2>Introduction to C#</h2>
+            <p>C# is a modern, object-oriented programming language developed by Microsoft. It is widely used for building Windows applications and games.</p>
+            <pre><code>using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine("Hello, World!");
+    }
+}</code></pre>
+        </div>
+
+        <div id="csharp-syntax" class="section">
+            <h2>C# Syntax</h2>
+            <p>C# code is structured using namespaces, classes, and methods.</p>
+            <pre><code>using System;
+
+namespace HelloWorld {
+    class Program {
+        static void Main(string[] args) {
+            Console.WriteLine("Hello, World!");
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div id="csharp-variables" class="section">
+            <h2>Variables and Data Types</h2>
+            <p>C# supports variables and data types like <code>int</code>, <code>string</code>, <code>bool</code>, and <code>double</code>.</p>
+            <pre><code>int age = 25;
+string name = "John";
+bool isStudent = true;
+double salary = 50000.50;</code></pre>
+        </div>
+
+        <div id="csharp-loops" class="section">
+            <h2>Loops</h2>
+            <p>C# supports loops like <code>for</code>, <code>while</code>, and <code>foreach</code>.</p>
+            <pre><code>for (int i = 0; i < 5; i++) {
+    Console.WriteLine("Number: " + i);
+}</code></pre>
+        </div>
+
+        <div id="csharp-functions" class="section">
+            <h2>Functions</h2>
+            <p>Functions in C# are defined using the <code>void</code> or <code>return</code> keyword.</p>
+            <pre><code>int Add(int a, int b) {
+    return a + b;
+}
+Console.WriteLine(Add(2, 3)); // Output: 5</code></pre>
+        </div>
+
+        <div id="csharp-oop" class="section">
+            <h2>OOP Concepts</h2>
+            <p>C# supports object-oriented programming concepts like classes, objects, inheritance, and polymorphism.</p>
+            <pre><code>class Person {
+    public string Name { get; set; }
+    public void Greet() {
+        Console.WriteLine("Hello, " + Name);
+    }
+}
+Person person = new Person();
+person.Name = "Alice";
+person.Greet();</code></pre>
+        </div>
+
+        <div id="csharp-exceptions" class="section">
+            <h2>Exception Handling</h2>
+            <p>C# uses <code>try</code>, <code>catch</code>, and <code>finally</code> for exception handling.</p>
+            <pre><code>try {
+    int result = 10 / 0;
+} catch (DivideByZeroException e) {
+    Console.WriteLine("Error: " + e.Message);
+}</code></pre>
+        </div>
+
+        <div id="csharp-file-handling" class="section">
+            <h2>File Handling</h2>
+            <p>C# can read and write files using the <code>System.IO</code> namespace.</p>
+            <pre><code>using System.IO;
+
+string path = "example.txt";
+File.WriteAllText(path, "Hello, World!");
+string content = File.ReadAllText(path);
+Console.WriteLine(content);</code></pre>
+        </div>
+
+        <!-- PostgreSQL Content -->
+        <div id="postgres-intro" class="section">
+            <h2>Introduction to PostgreSQL</h2>
+            <p>PostgreSQL is a powerful, open-source relational database system known for its reliability and advanced features.</p>
+            <pre><code>-- Example: Create a table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);</code></pre>
+        </div>
+
+        <div id="postgres-installation" class="section">
+            <h2>Installation</h2>
+            <p>PostgreSQL can be installed on various operating systems. Follow the official documentation for installation steps.</p>
+        </div>
+
+        <div id="postgres-create-db" class="section">
+            <h2>Creating Databases</h2>
+            <p>Use the <code>CREATE DATABASE</code> statement to create a new database.</p>
+            <pre><code>CREATE DATABASE mydb;</code></pre>
+        </div>
+
+        <div id="postgres-create-table" class="section">
+            <h2>Creating Tables</h2>
+            <p>Use the <code>CREATE TABLE</code> statement to create a new table.</p>
+            <pre><code>CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);</code></pre>
+        </div>
+
+        <div id="postgres-crud" class="section">
+            <h2>CRUD Operations</h2>
+            <p>CRUD stands for Create, Read, Update, and Delete. These are the basic operations performed on a database.</p>
+            <pre><code>-- Create
+INSERT INTO users (name, email) VALUES ('John', 'john@example.com');
+
+-- Read
+SELECT * FROM users;
+
+-- Update
+UPDATE users SET email = 'john.doe@example.com' WHERE id = 1;
+
+-- Delete
+DELETE FROM users WHERE id = 1;</code></pre>
+        </div>
+
+        <div id="postgres-joins" class="section">
+            <h2>Joins</h2>
+            <p>PostgreSQL supports various types of joins like <code>INNER JOIN</code>, <code>LEFT JOIN</code>, and <code>RIGHT JOIN</code>.</p>
+            <pre><code>SELECT users.name, orders.amount
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;</code></pre>
+        </div>
+
+        <div id="postgres-transactions" class="section">
+            <h2>Transactions</h2>
+            <p>Transactions ensure that a set of SQL operations are executed as a single unit.</p>
+            <pre><code>BEGIN;
+INSERT INTO users (name, email) VALUES ('Alice', 'alice@example.com');
+INSERT INTO orders (user_id, amount) VALUES (LASTVAL(), 100);
+COMMIT;</code></pre>
+        </div>
+
+        <div id="postgres-backup" class="section">
+            <h2>Backup and Restore</h2>
+            <p>PostgreSQL provides tools like <code>pg_dump</code> for backup and <code>pg_restore</code> for restoring databases.</p>
+            <pre><code># Backup
+pg_dump -U username -d mydb -f mydb_backup.sql
+
+# Restore
+psql -U username -d mydb -f mydb_backup.sql</code></pre>
+        </div>
+    </div>
+
+    <script>
+        // Toggle subtopics on main topic click
+        document.querySelectorAll('.main-topic').forEach(topic => {
+            topic.addEventListener('click', function (e) {
+                e.preventDefault();
+                const subtopics = this.nextElementSibling;
+                subtopics.style.display = subtopics.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Smooth scroll to subtopic content
+        document.querySelectorAll('#sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animations to sections when they come into view
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

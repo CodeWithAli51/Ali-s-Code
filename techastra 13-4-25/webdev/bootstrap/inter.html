@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap for Web Development</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Navbar Styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 6%;
+            background: #252a57;
+            box-shadow: 0 4px 8px rgba(75, 73, 73, 0.5);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav img {
+            width: 150px;
+        }
+
+        .nav-links {
+            flex: 1;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .nav-links ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links ul li:hover a {
+            color: #4d5b9b;
+        }
+        .nav-links ul li::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #5e64a1;
+    display: block;
+    margin: auto;
+    transition: width 0.3s;
+}
+
+.nav-links ul li:hover::after {
+    width: 100%;
+}
+
+        /* Sidebar Toggle Button */
+        #sidebar-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #34427ead;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+
+        /* Header Styles */
+        #header {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 60px;
+        }
+
+         /* Sidebar Styles */
+         #sidebar {
+            width: 250px;
+            background: #ffffff;
+            padding: 15px;
+            height: 1000vh;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            border-right: 2px solid #0077b6;
+            overflow-y: visible;
+            transition: left 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar.open {
+            left: 0;
+        }
+
+        #sidebar h3 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0077b6;
+        }
+
+        #sidebar a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: #303870;
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s;
+        }
+
+        #sidebar a:hover {
+            background: #caf0f8;
+        }
+
+        /* Adjust Content when Sidebar Opens */
+        #content {
+            margin-left: 20px;
+            padding: 20px;
+            margin-top: 10px;
+            transition: margin-left 0.3s ease;
+            overflow-y: scroll;
+        }
+
+        #sidebar.open ~ #content {
+            margin-left: 270px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid #303870 /* Blue accent border */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        pre {
+            background: #e6f7ff; /* Light blue background for code */
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #0077b6; /* Blue border */
+        }
+
+        h2,h1,h3,h4,h5,h6 {
+            color: #303870; /* Blue headings */
+        }
+        .auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    background-color: #303870;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+    background-color: #1b1f3d;
+}
+        /* Footer Styles */
+        #footer {
+            width: 100%;
+            background-color: #303870;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+            position: -webkit-sticky;
+        }
+        .footer-a:hover{
+            color: #19cfc6;
+        }
+        /* Main Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    color: #fff;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Nested Dropdown */
+  .nested-dropdown {
+    position: relative;
+  }
+  
+  .nested-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 100%; /* Position the nested dropdown to the right of the parent */
+    top: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .nested-dropdown-content a {
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .nested-dropdown-content a:hover {
+    background-color: #1b1f3d;
+  }
+  
+  .nested-dropdown:hover .nested-dropdown-content {
+    display: block;
+  }
+    </style>
+</head>
+<body>
+    <nav>
+        <button id="sidebar-toggle">☰</button>
+        <img src="/techastraa/logo4.png" alt="Logo">
+        <div class="nav-links">
+            <ul>
+               <li><a href="/post_login.php">HOME</a></li>
+               <li><a href="/privacy.html" target="_blank">POLICY</a></li>
+               <li class="dropdown">
+                 <a href="#" class="dropbtn">COURSES</a> <!-- Main Dropdown -->
+                 <div class="dropdown-content">
+                   <!-- Microsoft Office -->
+                   <div class="nested-dropdown">
+                     <a href="#">Microsoft Office</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="#" target="_blank" >Word</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">Excel</a>
+                       <a href="#" target="_blank">Advanced Excel</a>
+                       <a href="#" target="_blank" >PowerPoint</a>
+                     </div>
+                   </div>
+               
+                   <!-- Web Development -->
+                   <div class="nested-dropdown">
+                     <a href="#">Web Development</a> <!-- Category -->
+                     <div class="nested-dropdown-content">
+                       <a href="/techastraa/webdev/ht.html" target="_blank" >HTML</a>
+                       <a href="/techastraa/webdev/css.html" target="_blank" >CSS</a> <!-- Subcategory -->
+                       <a href="#" target="_blank">JavaScript</a>
+                       <a href="/techastraa/webdev/bootstrap/bootstrap.html" target="_blank" >Bootstrap</a>
+                     </div>
+                   </div>
+               
+                   <!-- App Development -->
+   <div class="nested-dropdown">
+     <a href="#">App Development</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/appdevelopment/kotlin.html" target="_blank">Kotlin</a>
+       <a href="#" target="_blank">Java</a>
+       <a href="/techastraa/appdevelopment/swift.html" target="_blank">Swift</a>
+     </div>
+   </div>
+
+   <!-- Data Analysis -->
+   <div class="nested-dropdown">
+     <a href="#">Data Analysis</a>
+     <div class="nested-dropdown-content">
+       <a href="python.html" >Python</a>
+       <a href="/techastraa/dataanalysis/r.htm" target="_blank">R</a>
+     </div>
+   </div>
+
+   <!-- Backend Languages -->
+   <div class="nested-dropdown">
+     <a href="#">Backend Languages</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/backend/python.htm" target="_blank">Python</a>
+       <a href="/techastraa/backend/java.htm" target="_blank">Java</a>
+       <a href="/techastraa/backend/C++.htm" target="_blank">C++</a>
+       <a href="/techastraa/backend/javascript.htm" target="_blank">JavaScript</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PHP</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Ruby</a>
+       <a href="/techastraa/clarisse.html" target="_blank">C#/.NET</a>
+     </div>
+   </div>
+
+   <!-- DSA -->
+   <a href="/techastraa/DSA.htm" target="_blank">DSA</a>
+
+   <!-- DBMS -->
+   <div class="nested-dropdown">
+     <a href="#">DBMS</a>
+     <div class="nested-dropdown-content">
+       <a href="/techastraa/clarisse.html" target="_blank" >SQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">MySQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">PostgreSQL</a>
+       <a href="/techastraa/clarisse.html" target="_blank">Oracle</a>
+                 </div>
+               </li>
+               <li><a href="mailto:teamtechashtra@hmail.com" >CONTACT US</a></li>
+            </ul>
+          </div>
+        <div class="auth-buttons">
+            <a href="/techastraa/logout.php"><button class="login">LOGOUT</button></a>
+            <a href="register.html"><button class="register">Register</button></a>
+           </div>
+    </nav>
+    
+    <div id="header">Bootstrap for Web Development</div>
+    
+    <div id="sidebar">
+        <br><br>
+        <h3>Menu</h3>
+        <a href="bootstrap.html" target="_blank">Introduction</a>
+        <a href="setup.html">Setting Up Bootstrap</a>
+        <a href="basic.html" target="_blank">Basic Bootstrap Webpage</a>
+        <a href="inter.html" >Intermediate Features</a>
+        <a href="advanced.html" target="_blank">Advanced Features</a>
+        <a href="projects.html" target="_blank">Bootstrap Projects</a>
+        <a href="resources.html" target="_blank">Resources</a>
+    </div>
+    <div id="content">
+        <section class="section">
+            <h2>Intermediate Features of Bootstrap</h2>
+            <p>Intermediate features in Bootstrap include components like the grid system, cards, modals, and utilities. These tools allow you to create more complex, responsive, and interactive layouts while maintaining consistency and efficiency in your design process.</p>
+            <h3>Why Are Intermediate Features Important?</h3>
+            <ul>
+                <li><strong>Flexibility:</strong> The grid system enables you to create flexible and responsive layouts that adapt to different screen sizes.</li>
+                <li><strong>Interactivity:</strong> Components like modals and dropdowns add dynamic functionality to your webpage.</li>
+                <li><strong>Enhanced Design:</strong> Cards and other components improve the visual appeal and usability of your design.</li>
+                <li><strong>Reusability:</strong> Bootstrap's pre-styled components save time and effort by providing ready-to-use building blocks.</li>
+            </ul>
+            <h3>Key Intermediate Features</h3>
+            <h4>1. Grid System</h4>
+            <p>The grid system is one of Bootstrap's most powerful features. It allows you to create responsive layouts using a 12-column grid structure. This system ensures that your content adjusts seamlessly across devices.</p>
+            <h5>How the Grid System Works</h5>
+            <ul>
+                <li><strong>Containers:</strong> Use <code>.container</code> for fixed-width layouts or <code>.container-fluid</code> for full-width layouts.</li>
+                <li><strong>Rows:</strong> Rows are horizontal groups of columns created using <code>.row</code>.</li>
+                <li><strong>Columns:</strong> Columns are defined using classes like <code>.col</code>, <code>.col-sm</code>, <code>.col-md</code>, <code>.col-lg</code>, and <code>.col-xl</code>.</li>
+            </ul>
+            <h5>Example: Basic Grid Layout</h5>
+            <pre>
+                &lt;div class="container"&gt;
+                    &lt;div class="row"&gt;
+                        &lt;div class="col-md-6"&gt;
+                            Column 1
+                        &lt;/div&gt;
+                        &lt;div class="col-md-6"&gt;
+                            Column 2
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                        </pre>
+            <h5>Responsive Breakpoints</h5>
+            <p>Bootstrap's grid system uses breakpoints to adjust layouts based on screen size:</p>
+            <ul>
+                <li><code>.col-*</code>: Extra small devices (default).</li>
+                <li><code>.col-sm-*</code>: Small devices (≥576px).</li>
+                <li><code>.col-md-*</code>: Medium devices (≥768px).</li>
+                <li><code>.col-lg-*</code>: Large devices (≥992px).</li>
+                <li><code>.col-xl-*</code>: Extra large devices (≥1200px).</li>
+            </ul>
+            <h4>2. Cards</h4>
+            <p>Cards are versatile containers for displaying content. They can include images, text, buttons, and more, making them ideal for showcasing products, blog posts, or user profiles.</p>
+            <h5>Basic Card Example</h5>
+            <pre>
+                &lt;div class="card" style="width: 18rem;"&gt;
+                    &lt;img src="https://via.placeholder.com/150" class="card-img-top" alt="Card Image"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;This is a simple card with an image and text.&lt;/p&gt;
+                        &lt;a href="#" class="btn btn-primary"&gt;Learn More&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                        </pre>
+            <h5>Card Variations</h5>
+            <ul>
+                <li><strong>Horizontal Cards:</strong> Combine <code>.row</code> and <code>.col</code> classes inside a card for horizontal layouts.</li>
+                <li><strong>Card Groups:</strong> Use <code>.card-group</code> to group multiple cards together.</li>
+                <li><strong>Card Decks:</strong> Use <code>.card-deck</code> for equal-width and height cards.</li>
+            </ul>
+            <h4>3. Modals</h4>
+            <p>Modals are dialog boxes that appear on top of the main content. They are commonly used for forms, alerts, or additional information.</p>
+            <h5>Basic Modal Example</h5>
+            <pre>
+                &lt;button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"&gt;
+                    Open Modal
+                &lt;/button&gt;
+                
+                &lt;div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"&gt;
+                    &lt;div class="modal-dialog"&gt;
+                        &lt;div class="modal-content"&gt;
+                            &lt;div class="modal-header"&gt;
+                                &lt;h5 class="modal-title" id="exampleModalLabel"&gt;Modal Title&lt;/h5&gt;
+                                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+                            &lt;/div&gt;
+                            &lt;div class="modal-body"&gt;
+                                This is the modal body content.
+                            &lt;/div&gt;
+                            &lt;div class="modal-footer"&gt;
+                                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+                                &lt;button type="button" class="btn btn-primary"&gt;Save Changes&lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                        </pre>
+            <h5>Customizing Modals</h5>
+            <ul>
+                <li>Add <code>.modal-dialog-centered</code> to center the modal vertically.</li>
+                <li>Use <code>.modal-lg</code> or <code>.modal-sm</code> for larger or smaller modals.</li>
+            </ul>
+            <h4>4. Utilities</h4>
+            <p>Bootstrap provides utility classes for spacing, typography, and other styling needs. These classes help you quickly customize your layout without writing custom CSS.</p>
+            <h5>Spacing Utilities</h5>
+            <ul>
+                <li>Margin: <code>m-{size}</code>, <code>mt-{size}</code> (top), <code>mb-{size}</code> (bottom), etc.</li>
+                <li>Padding: <code>p-{size}</code>, <code>pt-{size}</code> (top), <code>pb-{size}</code> (bottom), etc.</li>
+            </ul>
+            <h5>Example: Spacing</h5>
+            <pre>
+                &lt;div class="p-3"&gt;
+                    This box has padding of 1rem (p-3).
+                &lt;/div&gt;
+                
+                &lt;div class="mt-5"&gt;
+                    This element has a top margin of 3rem (mt-5).
+                &lt;/div&gt;
+                        </pre>
+            <h5>Typography Utilities</h5>
+            <ul>
+                <li>Text alignment: <code>.text-center</code>, <code>.text-right</code>, <code>.text-left</code>.</li>
+                <li>Text color: <code>.text-primary</code>, <code>.text-danger</code>, <code>.text-success</code>.</li>
+            </ul>
+            <h4>Tips for Beginners</h4>
+            <ul>
+                <li><strong>Start Simple:</strong> Begin with basic components like cards and modals before moving to advanced layouts.</li>
+                <li><strong>Use Documentation:</strong> Refer to the official Bootstrap documentation: <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">https://getbootstrap.com/docs/5.3/getting-started/introduction/</a>.</li>
+                <li><strong>Leverage Pre-built Templates:</strong> Use free templates from platforms like <a href="https://startbootstrap.com/" target="_blank">Start Bootstrap</a> to save time.</li>
+                <li><strong>Test Responsiveness:</strong> Always test your designs on different screen sizes to ensure they look good everywhere.</li>
+            </ul>
+        </section></div>
+           
+    <div id="footer">&copy; 2025 Tech Astra | <a href="/terms.html" id="footer" target="_blank">Terms</a> |<a href="/privacy.html" id="footer" target="_blank"> Privacy Policy</a></div>
+
+    <script>
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            let sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
