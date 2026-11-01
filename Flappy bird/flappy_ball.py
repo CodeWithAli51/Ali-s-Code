@@ -8,7 +8,7 @@ pygame.init()
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-AQUA = (0, 255, 191)
+AQUA = (0, 255, 191) 
 RED = (255, 0, 0)
 
 # Display dimensions
